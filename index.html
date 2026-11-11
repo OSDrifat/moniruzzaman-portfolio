@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md. Moniruzzaman Rifat — Software Quality Assurance Engineer</title>
+  <meta
+    name="description"
+    content="Portfolio of Md. Moniruzzaman Rifat — Software Quality Assurance & Testing Engineer."
+  />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Prevent theme flash on load -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem("portfolio-theme-v2");
+      var theme = saved === "light" || saved === "dark" ? saved : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <!-- Curated Font Pairing: Bricolage Grotesque + Plus Jakarta Sans + Instrument Serif + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css?v=35" />
+</head>
+<body>
+  <!-- Subtle paper-grain texture -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- =======================================================================
+       Header / Floating Architectural Dock Navigation
+       ======================================================================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Home">
+        <span id="brand-name">Moniruzzaman</span><span class="brand-dot">.</span>
+      </a>
+
+      <nav class="nav-dock" aria-label="Primary Navigation">
+        <div class="dock-track" id="dock-track">
+          <span class="dock-indicator" id="dock-indicator" aria-hidden="true"></span>
+          <a href="#top" class="dock-link is-active" aria-current="page">Home</a>
+          <a href="#education" class="dock-link">Education</a>
+          <a href="#skills" class="dock-link">Skills</a>
+          <a href="#projects" class="dock-link">Projects</a>
+          <a href="#projects" class="dock-link">Achievements</a>
+          <span class="dock-divider" aria-hidden="true"></span>
+          <a href="#top" class="dock-link" id="dock-cv">CV</a>
+          <a href="#contact" class="dock-link">Contact</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="availability-pill" title="Current work status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="availability-text" id="availability-text">Available for projects</span>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="theme-toggle"
+          aria-label="Toggle color theme"
+          title="Toggle theme (T)"
+        >
+          <!-- Sun Icon -->
+          <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon -->
+          <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="icon-btn menu-toggle"
+          id="menu-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-drawer"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <line x1="4" y1="8" x2="20" y2="8"></line>
+            <line x1="4" y1="16" x2="20" y2="16"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div class="container mobile-drawer-inner">
+        <a href="#top" class="drawer-link is-active" aria-current="page">Home</a>
+        <a href="#education" class="drawer-link">Education</a>
+        <a href="#skills" class="drawer-link">Skills</a>
+        <a href="#projects" class="drawer-link">Projects</a>
+        <a href="#projects" class="drawer-link">Achievements</a>
+        <a href="#top" class="drawer-link">CV</a>
+        <a href="#contact" class="drawer-link">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       Main — Portfolio Sections
+       ======================================================================= -->
+  <main>
+    <section id="top" class="container hero-section">
+    <!-- Top Editorial Metadata Strip -->
+    <div class="meta-bar mono reveal">
+      <div class="meta-group">
+        <span id="hero-location">BASED IN DHAKA, BD</span>
+        <span class="meta-sep" aria-hidden="true">/</span>
+        <span class="live-clock tabular" id="live-clock">--:--:--</span>
+      </div>
+      <div class="meta-group">
+        <span id="brand-tag">PORTFOLIO</span>
+        <span class="meta-sep" aria-hidden="true">/</span>
+        <span>EDITION 2026</span>
+        <span class="meta-sep" aria-hidden="true">/</span>
+        <span id="hero-focus">FOCUS: SOFTWARE QUALITY ASSURANCE &amp; TESTING</span>
+      </div>
+    </div>
+
+    <!-- Asymmetric Editorial Grid -->
+    <div class="hero-grid">
+      <!-- Left: Primary Statement -->
+      <div class="hero-main">
+        <p class="hero-eyebrow mono reveal reveal-delay-1" id="hero-role">
+          Software Quality Assurance Engineer
+        </p>
+
+        <h1 class="hero-headline reveal reveal-delay-2" id="hero-headline">
+          <span class="headline-kicker">I am</span>
+          <span class="headline-main">Md. Moniruzzaman</span>
+          <span class="headline-accent">
+            <span class="corner tl" aria-hidden="true"></span>
+            <span class="corner tr" aria-hidden="true"></span>
+            <span class="corner bl" aria-hidden="true"></span>
+            <span class="corner br" aria-hidden="true"></span>
+            Rifat
+          </span>
+        </h1>
+
+        <p class="hero-bio reveal reveal-delay-3" id="hero-bio">
+          Focused on catching edge cases early, structuring reliable test plans, and ensuring software ships cleanly. Working across manual testing, API validation, and test automation.
+        </p>
+
+        <div class="hero-actions reveal reveal-delay-4">
+          <a href="#projects" class="btn-primary">
+            <span class="btn-text-wrap">
+              <span class="btn-text-front">Selected Work</span>
+              <span class="btn-text-back" aria-hidden="true">Selected Work</span>
+            </span>
+            <span class="btn-arrow-box" aria-hidden="true">
+              <svg class="arrow-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 7l10 10M17 7v10H7"></path>
+              </svg>
+              <svg class="arrow-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 7l10 10M17 7v10H7"></path>
+              </svg>
+            </span>
+          </a>
+
+          <button type="button" class="btn-secondary" id="copy-email-btn" title="Copy email address (C)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="email-label">rifat.cse.dev@gmail.com</span>
+          </button>
+
+          <a href="#" class="text-cta" id="resume-link" target="_blank" rel="noopener noreferrer">
+            <span>Resume</span>
+            <span class="cta-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Portrait Frame & Studio Spec Table -->
+      <aside class="hero-aside reveal reveal-delay-3" aria-label="Profile overview">
+        <div class="portrait-frame">
+          <div class="portrait-media" id="portrait-media">
+            <img
+              id="portrait-img"
+              src="assets/portrait.png"
+              alt="Md. Moniruzzaman Rifat portrait"
+              loading="eager"
+            />
+            <div class="portrait-placeholder" id="portrait-placeholder" style="display: none;">
+              <span class="placeholder-monogram" id="placeholder-monogram">M.</span>
+              <span class="placeholder-note">Replace with your natural portrait photo in js/config.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec-list">
+          <div class="spec-row">
+            <span class="spec-label mono">Currently</span>
+            <span class="spec-value" id="spec-currently">Software Quality Assurance &amp; Testing</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label mono">Core Stack</span>
+            <span class="spec-value" id="spec-stack">Manual Testing · API Testing · Test Automation · Bug Tracking</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+    </section>
+
+  </main>
+
+  <script src="js/config.js?v=35"></script>
+  <script src="js/main.js?v=35"></script>
+</body>
+</html>
+
