@@ -932,6 +932,240 @@ button {
 }
 
 /* ==========================================================================
+   Section 01 — Education (Editorial Asymmetric Split)
+   ========================================================================== */
+.section-block {
+  scroll-margin-top: 86px;
+  border-top: 1px solid var(--hairline);
+  padding-block: clamp(4.25rem, 8vw, 6.5rem);
+}
+
+.edu-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.45fr);
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.edu-sidebar {
+  position: sticky;
+  top: 96px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.section-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: 1.12em;
+  color: var(--accent-hover);
+}
+
+[data-theme="light"] .section-title em {
+  color: var(--accent);
+}
+
+/* Academic Degree Ledger Cards */
+.edu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.edu-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.35rem, 2.5vw, 1.8rem);
+  border-radius: 14px;
+  background-color: var(--surface);
+  border: 1px solid var(--hairline);
+  transition:
+    transform 0.32s var(--ease-out),
+    background-color 0.28s var(--ease-out),
+    border-color 0.28s var(--ease-out),
+    box-shadow 0.32s var(--ease-out);
+}
+
+/* Signature Left Accent Rail on Hover */
+.edu-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #3b82f6 0%, #2dd4bf 100%);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.36s var(--ease-out);
+}
+
+.edu-card:hover {
+  transform: translateY(-2px);
+  background-color: var(--surface-hover);
+  border-color: var(--hairline-strong);
+  box-shadow: 0 14px 32px -18px rgba(2, 6, 23, 0.5);
+}
+
+[data-theme="light"] .edu-card:hover {
+  box-shadow: 0 14px 30px -16px rgba(15, 23, 42, 0.12);
+}
+
+.edu-card:hover::before {
+  transform: scaleY(1);
+}
+
+.edu-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.edu-meta-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.edu-index {
+  color: var(--accent-hover);
+  font-weight: 500;
+}
+
+[data-theme="light"] .edu-index {
+  color: var(--accent);
+}
+
+.edu-period {
+  color: var(--ink-muted);
+}
+
+.edu-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.24rem 0.7rem;
+  border-radius: 999px;
+  background-color: rgba(20, 184, 166, 0.14);
+  border: 1px solid rgba(45, 212, 191, 0.38);
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  letter-spacing: 0.04em;
+  color: #99f6e4;
+}
+
+[data-theme="light"] .edu-result {
+  background-color: rgba(13, 148, 136, 0.1);
+  border-color: rgba(13, 148, 136, 0.32);
+  color: #0f766e;
+}
+
+.edu-result--ongoing,
+[data-theme="light"] .edu-result--ongoing {
+  background-color: var(--status-soft);
+  border-color: var(--status-border);
+  color: var(--ink);
+}
+
+.edu-degree {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.18rem, 1.9vw, 1.42rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.edu-institution {
+  margin-top: 0.3rem;
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.edu-summary {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.edu-highlights {
+  margin-top: 1.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.edu-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background-color: rgba(30, 41, 59, 0.72);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: #e2e8f0;
+  transition:
+    border-color 0.25s var(--ease-out),
+    background-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+}
+
+.edu-chip::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #2dd4bf);
+  flex-shrink: 0;
+}
+
+.edu-chip:hover {
+  border-color: var(--accent-border);
+  background-color: var(--accent-soft);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .edu-chip {
+  border-color: rgba(15, 23, 42, 0.14);
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+[data-theme="light"] .edu-chip:hover {
+  border-color: var(--accent-border);
+  background-color: var(--accent-soft);
+  color: #0f172a;
+}
+
+/* ==========================================================================
    Subtle Staggered Reveal (Fast, Crisp, Accessible)
    ========================================================================== */
 .reveal {
@@ -995,6 +1229,15 @@ button {
 
   .hero-aside {
     max-width: 440px;
+  }
+
+  .edu-layout {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .edu-sidebar {
+    position: static;
   }
 
 }

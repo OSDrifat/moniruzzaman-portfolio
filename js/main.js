@@ -87,6 +87,8 @@
       if (placeholderEl) placeholderEl.style.display = "flex";
     }
 
+    // Education, Skills & Projects Section Hydration
+    renderEducation();
     // Social links
     if (config.socials) {
       const map = {
@@ -106,6 +108,68 @@
     if (className) node.className = className;
     if (text !== undefined && text !== null) node.textContent = text;
     return node;
+  }
+
+  function renderEducation() {
+    const edu = config.educationSection;
+    if (!edu) return;
+
+    const eyebrowEl = document.getElementById("edu-eyebrow");
+    const titleEl = document.getElementById("edu-title");
+    const eduListEl = document.getElementById("edu-list");
+
+    if (eyebrowEl && edu.eyebrow) eyebrowEl.textContent = edu.eyebrow;
+    if (titleEl && edu.titleHTML) titleEl.innerHTML = edu.titleHTML;
+
+    if (eduListEl && Array.isArray(edu.entries)) {
+      eduListEl.textContent = "";
+      edu.entries.forEach((item) => {
+        const card = createEl("article", "edu-card reveal-on-scroll");
+
+        const top = createEl("div", "edu-card-top");
+        const metaLeft = createEl("div", "edu-meta-left");
+        metaLeft.appendChild(createEl("span", "edu-index mono", item.index));
+        metaLeft.appendChild(createEl("span", "meta-sep", "/"));
+        metaLeft.appendChild(createEl("span", "edu-period mono tabular", item.period));
+        top.appendChild(metaLeft);
+
+        if (item.result) {
+          const pill = createEl(
+            "span",
+            item.ongoing ? "edu-result edu-result--ongoing" : "edu-result"
+          );
+          if (item.ongoing) {
+            const dot = createEl("span", "status-dot");
+            dot.setAttribute("aria-hidden", "true");
+            pill.appendChild(dot);
+          }
+          pill.appendChild(document.createTextNode(item.result));
+          top.appendChild(pill);
+        }
+        card.appendChild(top);
+
+        card.appendChild(createEl("h3", "edu-degree", item.degree));
+
+        const instText = item.location
+          ? `${item.institution} · ${item.location}`
+          : item.institution;
+        card.appendChild(createEl("p", "edu-institution", instText));
+
+        if (item.summary) {
+          card.appendChild(createEl("p", "edu-summary", item.summary));
+        }
+
+        if (Array.isArray(item.highlights) && item.highlights.length) {
+          const highlightsWrap = createEl("div", "edu-highlights");
+          item.highlights.forEach((chip) => {
+            highlightsWrap.appendChild(createEl("span", "edu-chip", chip));
+          });
+          card.appendChild(highlightsWrap);
+        }
+
+        eduListEl.appendChild(card);
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------

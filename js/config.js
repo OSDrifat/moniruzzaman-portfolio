@@ -40,5 +40,27 @@ window.SITE_CONFIG = {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
     x: "https://x.com"
+  },
+
+  // ---------------------------------------------------------------------------
+  // Education Section (Replace placeholder entries with your exact academic info)
+  // ---------------------------------------------------------------------------
+  educationSection: {
+    eyebrow: "01 / Education",
+    titleHTML: "Academic <em>Background</em>",
+    entries: [
+      {
+        index: "01",
+        degree: "B.Sc. in Computer Science & Engineering",
+        institution: "Daffodil International University",
+        location: "Dhaka, Bangladesh",
+        period: "2023 — 2026",
+        result: "Ongoing",
+        ongoing: true,
+        summary:
+          "Core focus on Software Engineering, Database Management Systems, Data Structures, and Algorithms.",
+        highlights: ["Software Engineering", "DBMS", "Data Structures", "Java"]
+      }
+    ]
   }
 };
