@@ -60,6 +60,17 @@ window.SITE_CONFIG = {
         summary:
           "Core focus on Software Engineering, Database Management Systems, Data Structures, and Algorithms.",
         highlights: ["Software Engineering", "DBMS", "Data Structures", "Java"]
+      },
+      {
+        index: "02",
+        degree: "Higher Secondary Certificate (HSC) — Science",
+        institution: "Border Guard Public School And College",
+        location: "CO Bazar, Rangpur",
+        period: "2019 — 2020",
+        result: "GPA: 5.00 / 5.00",
+        summary:
+          "Completed higher secondary studies in Science with a focus on Mathematics, Physics, and ICT.",
+        highlights: ["Science Group", "Higher Math", "ICT"]
       }
     ]
   }
