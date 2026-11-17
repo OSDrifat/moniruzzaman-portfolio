@@ -71,6 +71,17 @@ window.SITE_CONFIG = {
         summary:
           "Completed higher secondary studies in Science with a focus on Mathematics, Physics, and ICT.",
         highlights: ["Science Group", "Higher Math", "ICT"]
+      },
+      {
+        index: "03",
+        degree: "Secondary School Certificate (SSC) — Science",
+        institution: "Bir Uttam Shaheed Samad School & College",
+        location: "Rangpur, Bangladesh",
+        period: "2017 — 2018",
+        result: "GPA: 5.00 / 5.00",
+        summary:
+          "Completed secondary education in the Science track with strong grounding in Mathematics and Science.",
+        highlights: ["Science Group", "Mathematics"]
       }
     ]
   }
