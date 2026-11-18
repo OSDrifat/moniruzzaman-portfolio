@@ -257,11 +257,284 @@
             }
           });
           gridEl.classList.toggle("skills-grid--single", visibleCount === 1);
+          setOrbitFilter(filter.id);
         });
 
         filtersEl.appendChild(btn);
       });
     }
+
+    initOrbitSphere();
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1b. Continuous 3D Rotating Skills Sphere (60fps Golden-Angle Fibonacci)
+  // ---------------------------------------------------------------------------
+  let activeOrbitFilter = "all";
+  let orbitNodes = [];
+
+  function setOrbitFilter(filterId) {
+    activeOrbitFilter = filterId || "all";
+    orbitNodes.forEach((node) => {
+      const dim = activeOrbitFilter !== "all" && node.group !== activeOrbitFilter;
+      node.el.classList.toggle("is-dimmed", dim);
+    });
+  }
+
+  function createSvg(viewBox, color, builder) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", viewBox || "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    if (color) svg.style.color = color;
+    builder(svg);
+    return svg;
+  }
+
+  function svgEl(tag, attrs) {
+    const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+    return el;
+  }
+
+  function buildSkillSvg(type) {
+    switch (type) {
+      case "c":
+        return createSvg("0 0 24 24", "#60a5fa", (s) => {
+          s.appendChild(svgEl("polygon", { points: "12,2 21,7 21,17 12,22 3,17 3,7", fill: "rgba(37,99,235,0.2)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M15.2 9.4a4.2 4.2 0 1 0 0 5.2", stroke: "#93c5fd", "stroke-width": "2.2", "stroke-linecap": "round" }));
+        });
+      case "java":
+        return createSvg("0 0 24 24", "#f59e0b", (s) => {
+          s.appendChild(svgEl("path", { d: "M6 12h9v4a4 4 0 0 1-4 4h-1a4 4 0 0 1-4-4v-4z", fill: "rgba(245,158,11,0.18)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M15 13h2a2 2 0 0 1 0 4h-2", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M9 8c0-1.5 1.5-2 1.5-3.5M12.5 8c0-1.5 1.5-2 1.5-3.5", stroke: "#fbbf24", "stroke-width": "1.5", "stroke-linecap": "round" }));
+          s.appendChild(svgEl("path", { d: "M5 21h12", stroke: "#60a5fa", "stroke-width": "1.6", "stroke-linecap": "round" }));
+        });
+      case "js":
+        return createSvg("0 0 24 24", "#facc15", (s) => {
+          s.appendChild(svgEl("rect", { x: "3", y: "3", width: "18", height: "18", rx: "3.5", fill: "#facc15" }));
+          s.appendChild(svgEl("path", { d: "M10.5 11v5a1.8 1.8 0 0 1-3.2 1", stroke: "#0f172a", "stroke-width": "1.9", "stroke-linecap": "round" }));
+          s.appendChild(svgEl("path", { d: "M17.2 12.2c0-.9-.8-1.4-1.8-1.4s-1.8.5-1.8 1.3c0 1.9 3.7 1.1 3.7 3.1 0 1-.9 1.6-2 1.6-1 0-1.8-.4-2.1-1.1", stroke: "#0f172a", "stroke-width": "1.8", "stroke-linecap": "round" }));
+        });
+      case "html":
+        return createSvg("0 0 24 24", "#f97316", (s) => {
+          s.appendChild(svgEl("polygon", { points: "4,3 20,3 18.5,18.5 12,21 5.5,18.5", fill: "rgba(249,115,22,0.2)", stroke: "currentColor", "stroke-width": "1.6", "stroke-linejoin": "round" }));
+          s.appendChild(svgEl("path", { d: "M15.5 7.5H8.8l.4 4h5.9l-.4 4.2-2.7.9-2.7-.9-.2-1.8", stroke: "#fdba74", "stroke-width": "1.7", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        });
+      case "css":
+        return createSvg("0 0 24 24", "#38bdf8", (s) => {
+          s.appendChild(svgEl("polygon", { points: "4,3 20,3 18.5,18.5 12,21 5.5,18.5", fill: "rgba(56,189,248,0.2)", stroke: "currentColor", "stroke-width": "1.6", "stroke-linejoin": "round" }));
+          s.appendChild(svgEl("path", { d: "M8.5 7.5h7l-.5 4h-5m5 0l-.4 4.2-2.6.9-2.6-.9-.2-1.6", stroke: "#7dd3fc", "stroke-width": "1.7", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        });
+      case "sql":
+        return createSvg("0 0 24 24", "#2dd4bf", (s) => {
+          s.appendChild(svgEl("ellipse", { cx: "12", cy: "6", rx: "7.5", ry: "3", fill: "rgba(45,212,191,0.18)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M4.5 6v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M4.5 12v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-6", stroke: "currentColor", "stroke-width": "1.6" }));
+        });
+      case "git":
+        return createSvg("0 0 24 24", "#fb7185", (s) => {
+          s.appendChild(svgEl("rect", { x: "5", y: "5", width: "14", height: "14", rx: "2.5", transform: "rotate(45 12 12)", fill: "rgba(251,113,133,0.18)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("circle", { cx: "12", cy: "8.5", r: "1.4", fill: "currentColor" }));
+          s.appendChild(svgEl("circle", { cx: "12", cy: "15.5", r: "1.4", fill: "currentColor" }));
+          s.appendChild(svgEl("circle", { cx: "15.5", cy: "12", r: "1.4", fill: "currentColor" }));
+          s.appendChild(svgEl("path", { d: "M12 9.9v4.2M12.8 10.2l2 1.4", stroke: "currentColor", "stroke-width": "1.5" }));
+        });
+      case "github":
+        return createSvg("0 0 24 24", "var(--ink)", (s) => {
+          s.appendChild(svgEl("path", {
+            d: "M12 2.5a9.5 9.5 0 0 0-3 18.5c.47.09.65-.2.65-.45v-1.6c-2.64.57-3.2-1.27-3.2-1.27-.43-1.1-1.06-1.39-1.06-1.39-.86-.59.07-.58.07-.58.95.07 1.46.98 1.46.98.85 1.45 2.23 1.03 2.77.79.09-.61.33-1.03.6-1.27-2.11-.24-4.33-1.05-4.33-4.69 0-1.04.37-1.89.98-2.55-.1-.24-.42-1.21.09-2.52 0 0 .8-.26 2.62.97a9.1 9.1 0 0 1 4.76 0c1.82-1.23 2.62-.97 2.62-.97.51 1.31.19 2.28.09 2.52.61.66.98 1.51.98 2.55 0 3.65-2.22 4.45-4.34 4.68.34.3.65.88.65 1.77v2.63c0 .25.17.55.66.45A9.5 9.5 0 0 0 12 2.5z",
+            fill: "currentColor"
+          }));
+        });
+      case "vscode":
+        return createSvg("0 0 24 24", "#3b82f6", (s) => {
+          s.appendChild(svgEl("path", { d: "M17.5 3.5l3 1.5v14l-3 1.5-8.5-7.8-4 3.1-1.8-.9 3.6-3.4-3.6-3.4 1.8-.9 4 3.1 8.5-6.8z", fill: "rgba(59,130,246,0.22)", stroke: "currentColor", "stroke-width": "1.5", "stroke-linejoin": "round" }));
+          s.appendChild(svgEl("path", { d: "M17.5 3.5v17", stroke: "#60a5fa", "stroke-width": "1.6" }));
+        });
+      case "stlc":
+        return createSvg("0 0 24 24", "#34d399", (s) => {
+          s.appendChild(svgEl("path", { d: "M20 11a8 8 0 0 0-14.6-4.6M4 13a8 8 0 0 0 14.6 4.6", stroke: "currentColor", "stroke-width": "1.8", "stroke-linecap": "round" }));
+          s.appendChild(svgEl("polyline", { points: "16 4 20 5 19 9", stroke: "currentColor", "stroke-width": "1.7", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+          s.appendChild(svgEl("polyline", { points: "8 20 4 19 5 15", stroke: "currentColor", "stroke-width": "1.7", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        });
+      case "testcases":
+        return createSvg("0 0 24 24", "#38bdf8", (s) => {
+          s.appendChild(svgEl("rect", { x: "5", y: "4", width: "14", height: "17", rx: "2.5", fill: "rgba(56,189,248,0.16)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M9 9.5l1.5 1.5 3-3M9 15l1.5 1.5 3-3", stroke: "#7dd3fc", "stroke-width": "1.6", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        });
+      case "regression":
+        return createSvg("0 0 24 24", "#60a5fa", (s) => {
+          s.appendChild(svgEl("path", { d: "M12 3l7.5 3.5v5.5c0 4.5-3.2 8-7.5 9.2-4.3-1.2-7.5-4.7-7.5-9.2V6.5L12 3z", fill: "rgba(59,130,246,0.18)", stroke: "currentColor", "stroke-width": "1.6", "stroke-linejoin": "round" }));
+          s.appendChild(svgEl("path", { d: "M8.8 12.2l2.1 2.1 4.4-4.4", stroke: "#93c5fd", "stroke-width": "1.8", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        });
+      case "smoke":
+        return createSvg("0 0 24 24", "#4ade80", (s) => {
+          s.appendChild(svgEl("circle", { cx: "12", cy: "12", r: "8.5", fill: "rgba(74,222,128,0.14)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M6.5 12h3l1.7-3.5 2.4 7 1.6-3.5h2.8", stroke: "currentColor", "stroke-width": "1.7", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        });
+      case "exploratory":
+        return createSvg("0 0 24 24", "#fbbf24", (s) => {
+          s.appendChild(svgEl("circle", { cx: "11", cy: "11", r: "6.5", fill: "rgba(251,191,36,0.15)", stroke: "currentColor", "stroke-width": "1.7" }));
+          s.appendChild(svgEl("path", { d: "M16 16l4.5 4.5", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round" }));
+          s.appendChild(svgEl("circle", { cx: "11", cy: "11", r: "1.8", fill: "currentColor" }));
+        });
+      default: // bug triage
+        return createSvg("0 0 24 24", "#f87171", (s) => {
+          s.appendChild(svgEl("ellipse", { cx: "12", cy: "13", rx: "4.5", ry: "5.5", fill: "rgba(248,113,113,0.16)", stroke: "currentColor", "stroke-width": "1.6" }));
+          s.appendChild(svgEl("path", { d: "M9 7.5L7.5 5M15 7.5L16.5 5M5 12h2.5M16.5 12H19M6 16.5l2-1M18 16.5l-2-1M12 8v10", stroke: "currentColor", "stroke-width": "1.5", "stroke-linecap": "round" }));
+        });
+    }
+  }
+
+  let orbitAnimId = null;
+
+  function initOrbitSphere() {
+    const stage = document.getElementById("orbit-stage");
+    const cloud = document.getElementById("orbit-cloud");
+    if (!stage || !cloud) return;
+
+    if (orbitAnimId) {
+      cancelAnimationFrame(orbitAnimId);
+      orbitAnimId = null;
+    }
+
+    const items = [
+      { label: "C", note: "Structured programming & logic", icon: "c", group: "code" },
+      { label: "Java", note: "OOP & test scripting", icon: "java", group: "code" },
+      { label: "JavaScript", note: "DOM logic & web debugging", icon: "js", group: "code" },
+      { label: "HTML5", note: "Semantic UI structure", icon: "html", group: "code" },
+      { label: "CSS3", note: "Responsive layout inspection", icon: "css", group: "code" },
+      { label: "MySQL", note: "Database & SQL validation", icon: "sql", group: "code" },
+      { label: "Git", note: "Branching & source control", icon: "git", group: "code" },
+      { label: "GitHub", note: "Repos & PR collaboration", icon: "github", group: "code" },
+      { label: "VS Code", note: "Code editing & debugging", icon: "vscode", group: "code" },
+      { label: "STLC", note: "SRS analysis & test planning", icon: "stlc", group: "qa" },
+      { label: "Test Cases", note: "Boundary & equivalence design", icon: "testcases", group: "qa" },
+      { label: "Regression", note: "Release confidence checks", icon: "regression", group: "qa" },
+      { label: "Smoke QA", note: "Build health verification", icon: "smoke", group: "qa" },
+      { label: "Exploratory", note: "Edge-case discovery", icon: "exploratory", group: "qa" },
+      { label: "Bug Triage", note: "Clear steps & defect lifecycle", icon: "bug", group: "qa" }
+    ];
+
+    cloud.textContent = "";
+    orbitNodes = [];
+
+    const count = items.length;
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+    items.forEach((item, idx) => {
+      const y = 1 - (idx / (count - 1)) * 2;
+      const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
+      const theta = goldenAngle * idx;
+
+      const x = Math.cos(theta) * radiusAtY;
+      const z = Math.sin(theta) * radiusAtY;
+
+      const nodeEl = createEl("button", "orbit-node");
+      nodeEl.type = "button";
+      nodeEl.setAttribute("aria-label", `${item.label}: ${item.note}`);
+
+      const iconWrap = createEl("span", "orbit-node-icon");
+      iconWrap.appendChild(buildSkillSvg(item.icon));
+      nodeEl.appendChild(iconWrap);
+      nodeEl.appendChild(createEl("span", "orbit-node-label", item.label));
+
+      nodeEl.addEventListener("pointerenter", () => {
+        speedFactor = 0.2;
+      });
+
+      nodeEl.addEventListener("pointerleave", () => {
+        speedFactor = 1;
+      });
+
+      nodeEl.addEventListener("focus", () => {
+        speedFactor = 0.2;
+      });
+
+      nodeEl.addEventListener("blur", () => {
+        speedFactor = 1;
+      });
+
+      cloud.appendChild(nodeEl);
+      orbitNodes.push({
+        el: nodeEl,
+        x,
+        y,
+        z,
+        group: item.group
+      });
+    });
+
+    const baseVelY = 0.0048;
+    const baseVelX = 0.0017;
+    let velY = baseVelY;
+    let velX = baseVelX;
+    let targetVelY = baseVelY;
+    let targetVelX = baseVelX;
+    let speedFactor = 1;
+
+    if (!stage.dataset.orbitBound) {
+      stage.dataset.orbitBound = "true";
+      stage.addEventListener("pointermove", (e) => {
+        const rect = stage.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) / rect.width - 0.5;
+        const ny = (e.clientY - rect.top) / rect.height - 0.5;
+        targetVelY = nx * 0.018;
+        targetVelX = -ny * 0.014;
+      });
+
+      stage.addEventListener("pointerleave", () => {
+        targetVelY = baseVelY;
+        targetVelX = baseVelX;
+        speedFactor = 1;
+      });
+    }
+
+    function tick() {
+      velY += (targetVelY - velY) * 0.06;
+      velX += (targetVelX - velX) * 0.06;
+
+      const ay = velY * speedFactor;
+      const ax = velX * speedFactor;
+      const cosY = Math.cos(ay);
+      const sinY = Math.sin(ay);
+      const cosX = Math.cos(ax);
+      const sinX = Math.sin(ax);
+
+      const radius = Math.min(stage.clientWidth, stage.clientHeight) * 0.37;
+      const perspective = 2.65;
+
+      orbitNodes.forEach((node) => {
+        // Rotate around Y axis
+        const x1 = node.x * cosY - node.z * sinY;
+        const z1 = node.z * cosY + node.x * sinY;
+        // Rotate around X axis
+        const y2 = node.y * cosX - z1 * sinX;
+        const z2 = z1 * cosX + node.y * sinX;
+
+        node.x = x1;
+        node.y = y2;
+        node.z = z2;
+
+        const depthScale = perspective / (perspective - z2);
+        const px = x1 * radius * depthScale;
+        const py = y2 * radius * depthScale;
+        const scale = Math.max(0.58, Math.min(1.16, depthScale * 0.85));
+
+        const dimmed = activeOrbitFilter !== "all" && node.group !== activeOrbitFilter;
+        const baseAlpha = Math.max(0.24, Math.min(1, (z2 + 1.15) * 0.52));
+        const finalAlpha = dimmed ? baseAlpha * 0.22 : baseAlpha;
+
+        node.el.style.transform = `translate3d(${px.toFixed(1)}px, ${py.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+        node.el.style.opacity = finalAlpha.toFixed(2);
+        node.el.style.zIndex = String(Math.round((z2 + 1.5) * 100));
+      });
+
+      orbitAnimId = requestAnimationFrame(tick);
+    }
+
+    orbitAnimId = requestAnimationFrame(tick);
   }
 
   // ---------------------------------------------------------------------------

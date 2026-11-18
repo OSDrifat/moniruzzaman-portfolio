@@ -252,8 +252,21 @@
         <div class="skill-filters" id="skill-filters" role="tablist" aria-label="Filter skills by category"></div>
       </div>
 
-      <!-- Structured Skill Categories -->
-      <div class="skills-grid" id="skills-grid"></div>
+      <div class="skills-split">
+        <!-- Sticky Left: Continuous 3D Rotating Skill Sphere -->
+        <aside class="skills-orbit-card reveal-on-scroll" aria-label="3D rotating skills showcase">
+          <div class="orbit-stage" id="orbit-stage">
+            <div class="orbit-ring orbit-ring--outer" aria-hidden="true"></div>
+            <div class="orbit-ring orbit-ring--inner" aria-hidden="true"></div>
+            <div class="orbit-axis orbit-axis--x" aria-hidden="true"></div>
+            <div class="orbit-axis orbit-axis--y" aria-hidden="true"></div>
+            <div class="orbit-cloud" id="orbit-cloud"></div>
+          </div>
+        </aside>
+
+        <!-- Right: Structured Skill Categories -->
+        <div class="skills-grid" id="skills-grid"></div>
+      </div>
     </section>
 
   </main>
