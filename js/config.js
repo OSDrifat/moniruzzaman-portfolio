@@ -84,5 +84,56 @@ window.SITE_CONFIG = {
         highlights: ["Science Group", "Mathematics"]
       }
     ]
+  },
+
+  // ---------------------------------------------------------------------------
+  // Skills Section (Edit tools, languages, and QA areas to match your exact stack)
+  // ---------------------------------------------------------------------------
+  skillsSection: {
+    eyebrow: "02 / Capabilities",
+    titleHTML: "Testing &amp; <em>Technical Stack</em>",
+    filters: [
+      { id: "all", label: "All" },
+      { id: "qa", label: "QA & Testing" },
+      { id: "code", label: "Code & Tools" }
+    ],
+    categories: [
+      {
+        index: "01",
+        filter: "qa",
+        title: "QA & Manual Testing",
+        badge: "Core QA",
+        items: [
+          { name: "Test Planning & STLC", note: "SRS analysis & test strategy" },
+          { name: "Test Case Design", note: "Boundary & equivalence checks" },
+          { name: "Regression & Smoke Testing", note: "Release confidence checks" },
+          { name: "Exploratory Testing", note: "Edge-case discovery" },
+          { name: "Bug Reporting & Lifecycle", note: "Clear steps & severity triage" }
+        ]
+      },
+      {
+        index: "02",
+        filter: "code",
+        title: "Programming & Databases",
+        badge: "Engineering",
+        items: [
+          { name: "C", note: "Structured programming & logic" },
+          { name: "Java", note: "OOP & test scripting" },
+          { name: "JavaScript", note: "DOM logic & web debugging" },
+          { name: "SQL / MySQL", note: "Data integrity & query checks" },
+          { name: "HTML5 & CSS3", note: "UI structure & layout checks" }
+        ]
+      },
+      {
+        index: "03",
+        filter: "code",
+        title: "Dev Tools & Workflow",
+        badge: "Workflow",
+        items: [
+          { name: "Git & GitHub", note: "Version control & PR review" },
+          { name: "VS Code", note: "Code editing & debugging" }
+        ]
+      }
+    ]
   }
 };

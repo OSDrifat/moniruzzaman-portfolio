@@ -89,6 +89,7 @@
 
     // Education, Skills & Projects Section Hydration
     renderEducation();
+    renderSkills();
     // Social links
     if (config.socials) {
       const map = {
@@ -168,6 +169,97 @@
         }
 
         eduListEl.appendChild(card);
+      });
+    }
+  }
+
+  function renderSkills() {
+    const skills = config.skillsSection;
+    if (!skills) return;
+
+    const eyebrowEl = document.getElementById("skills-eyebrow");
+    const titleEl = document.getElementById("skills-title");
+    const filtersEl = document.getElementById("skill-filters");
+    const gridEl = document.getElementById("skills-grid");
+
+    if (eyebrowEl && skills.eyebrow) eyebrowEl.textContent = skills.eyebrow;
+    if (titleEl && skills.titleHTML) titleEl.innerHTML = skills.titleHTML;
+
+    if (gridEl && Array.isArray(skills.categories)) {
+      gridEl.textContent = "";
+      skills.categories.forEach((cat) => {
+        const card = createEl("article", "skill-card reveal-on-scroll");
+        card.setAttribute("data-filter-group", cat.filter || "all");
+
+        const top = createEl("div", "skill-card-top");
+        const headingWrap = createEl("div", "skill-card-heading");
+        headingWrap.appendChild(createEl("span", "skill-index mono", cat.index));
+        headingWrap.appendChild(createEl("h3", "skill-title", cat.title));
+        top.appendChild(headingWrap);
+
+        if (cat.badge) {
+          top.appendChild(createEl("span", "skill-badge", cat.badge));
+        }
+        card.appendChild(top);
+
+        if (Array.isArray(cat.items)) {
+          const list = createEl("div", "skill-list");
+          cat.items.forEach((item) => {
+            const row = createEl("div", "skill-row");
+
+            const nameWrap = createEl("span", "skill-name-wrap");
+            const dot = createEl("span", "skill-dot");
+            dot.setAttribute("aria-hidden", "true");
+            nameWrap.appendChild(dot);
+            nameWrap.appendChild(document.createTextNode(item.name));
+            row.appendChild(nameWrap);
+
+            if (item.note) {
+              row.appendChild(createEl("span", "skill-note", item.note));
+            }
+            list.appendChild(row);
+          });
+          card.appendChild(list);
+        }
+
+        gridEl.appendChild(card);
+      });
+    }
+
+    if (filtersEl && Array.isArray(skills.filters) && gridEl) {
+      filtersEl.textContent = "";
+      skills.filters.forEach((filter, idx) => {
+        const btn = createEl(
+          "button",
+          idx === 0 ? "skill-filter-btn is-active" : "skill-filter-btn",
+          filter.label
+        );
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", String(idx === 0));
+
+        btn.addEventListener("click", () => {
+          filtersEl.querySelectorAll(".skill-filter-btn").forEach((other) => {
+            const active = other === btn;
+            other.classList.toggle("is-active", active);
+            other.setAttribute("aria-selected", String(active));
+          });
+
+          const cards = Array.from(gridEl.querySelectorAll(".skill-card"));
+          let visibleCount = 0;
+          cards.forEach((card) => {
+            const match =
+              filter.id === "all" || card.getAttribute("data-filter-group") === filter.id;
+            card.classList.toggle("is-hidden", !match);
+            if (match) {
+              card.classList.add("is-visible");
+              visibleCount += 1;
+            }
+          });
+          gridEl.classList.toggle("skills-grid--single", visibleCount === 1);
+        });
+
+        filtersEl.appendChild(btn);
       });
     }
   }
