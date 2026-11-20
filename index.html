@@ -269,7 +269,83 @@
       </div>
     </section>
 
+    <!-- =====================================================================
+         Section 03 — Projects & Case Studies
+         ===================================================================== -->
+    <section id="projects" class="container section-block" aria-labelledby="projects-title">
+      <div class="skills-header reveal-on-scroll">
+        <div>
+          <p class="hero-eyebrow mono" id="projects-eyebrow">03 / Selected Work</p>
+          <h2 class="section-title" id="projects-title">
+            Projects &amp; <em>Case Studies</em>
+          </h2>
+        </div>
+
+        <div class="skill-filters" id="project-filters" role="tablist" aria-label="Filter projects by category"></div>
+      </div>
+
+      <div class="projects-grid" id="projects-grid"></div>
+    </section>
   </main>
+
+  <!-- Project Case Study Modal -->
+  <div class="modal-backdrop" id="project-modal" hidden aria-hidden="true">
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-top">
+        <div class="modal-meta mono">
+          <span id="modal-index">01</span>
+          <span class="meta-sep" aria-hidden="true">/</span>
+          <span id="modal-year">2026</span>
+          <span class="meta-sep" aria-hidden="true">/</span>
+          <span class="modal-cat" id="modal-category">QA Case Study</span>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="modal-close"
+          aria-label="Close case study"
+          title="Close (Esc)"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-media" id="modal-media" hidden></div>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="modal-tagline" id="modal-tagline"></p>
+
+        <div class="modal-columns">
+          <div class="modal-block">
+            <span class="mono modal-label">Problem / Context</span>
+            <p class="modal-text" id="modal-problem"></p>
+          </div>
+          <div class="modal-block">
+            <span class="mono modal-label">Approach &amp; Execution</span>
+            <p class="modal-text" id="modal-solution"></p>
+          </div>
+        </div>
+
+        <div class="modal-block">
+          <span class="mono modal-label">Key Deliverables</span>
+          <ul class="modal-deliverables" id="modal-deliverables"></ul>
+        </div>
+
+        <div class="modal-tags" id="modal-tags"></div>
+      </div>
+
+      <div class="modal-footer" id="modal-links"></div>
+    </div>
+  </div>
 
   <script src="js/config.js?v=35"></script>
   <script src="js/main.js?v=35"></script>

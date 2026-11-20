@@ -90,6 +90,8 @@
     // Education, Skills & Projects Section Hydration
     renderEducation();
     renderSkills();
+    renderProjects();
+
     // Social links
     if (config.socials) {
       const map = {
@@ -265,6 +267,324 @@
     }
 
     initOrbitSphere();
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1c. Projects & Case Study Modal
+  // ---------------------------------------------------------------------------
+  function buildProjectMock(item) {
+    const mock = createEl("div", "preview-mock");
+    const chrome = createEl("div", "mock-chrome");
+    const dots = createEl("div", "mock-dots");
+    dots.appendChild(createEl("span"));
+    dots.appendChild(createEl("span"));
+    dots.appendChild(createEl("span"));
+    chrome.appendChild(dots);
+
+    const urlLabel =
+      item.previewType === "qa-report"
+        ? "qa-suite / regression.spec"
+        : item.previewType === "ai-xray"
+          ? "xai-pipeline / chest_xray_cnn"
+          : item.previewType === "web-ui"
+            ? "portal / records.sql"
+            : "src / BillingApp.java";
+    chrome.appendChild(createEl("span", "mock-url", urlLabel));
+    mock.appendChild(chrome);
+
+    const body = createEl("div", "mock-body");
+    const rows =
+      item.previewType === "qa-report"
+        ? [
+            ["TC-01 · Cart quantity boundary", "PASS", "mock-pill--pass"],
+            ["TC-14 · Coupon validation check", "PASS", "mock-pill--pass"],
+            ["TC-29 · Session timeout guard", "VERIFIED", "mock-pill--info"]
+          ]
+        : item.previewType === "ai-xray"
+          ? [
+              ["Input · Chest X-Ray Scan", "PREPROCESSED", "mock-pill--info"],
+              ["Model · Hybrid CNN Classifier", "TB / PNEUMONIA", "mock-pill--pass"],
+              ["Layer · Explainable AI (XAI)", "INTERPRETABLE", "mock-pill--pass"]
+            ]
+          : item.previewType === "web-ui"
+            ? [
+                ["Schema · students_enrollments", "NORMALIZED", "mock-pill--info"],
+                ["Form · Duplicate roll check", "VALIDATED", "mock-pill--pass"],
+                ["UI · Responsive table flow", "CLEAN", "mock-pill--pass"]
+              ]
+            : [
+                ["Class · InvoiceCalculator", "OOP", "mock-pill--info"],
+                ["Guard · Negative qty exception", "HANDLED", "mock-pill--pass"],
+                ["Suite · Boundary test run", "PASSED", "mock-pill--pass"]
+              ];
+
+    rows.forEach(([label, status, cls]) => {
+      const row = createEl("div", "mock-row");
+      row.appendChild(createEl("span", null, label));
+      row.appendChild(createEl("span", `mock-pill ${cls}`, status));
+      body.appendChild(row);
+    });
+
+    mock.appendChild(body);
+    return mock;
+  }
+
+  const projectModal = document.getElementById("project-modal");
+  const modalCloseBtn = document.getElementById("modal-close");
+
+  function closeProjectModal() {
+    if (!projectModal || projectModal.hasAttribute("hidden")) return;
+    projectModal.setAttribute("hidden", "");
+    projectModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  function openProjectModal(item) {
+    if (!projectModal) return;
+
+    const setModalText = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val || "";
+    };
+
+    const mediaEl = document.getElementById("modal-media");
+    if (mediaEl) {
+      mediaEl.textContent = "";
+      const slides =
+        Array.isArray(item.gallery) && item.gallery.length
+          ? item.gallery
+          : item.imageUrl
+            ? [{ label: "Preview", src: item.imageUrl, caption: item.title }]
+            : [];
+
+      if (slides.length) {
+        const img = document.createElement("img");
+        const captionEl = createEl("p", "modal-media-caption", "");
+        const applySlide = (slide, fallbackIdx) => {
+          img.src = slide.src;
+          img.alt = slide.caption || `${item.title} screenshot ${fallbackIdx + 1}`;
+          img.style.backgroundColor = slide.canvasBg || "#ffffff";
+          captionEl.textContent = slide.caption || "";
+        };
+
+        applySlide(slides[0], 0);
+        mediaEl.appendChild(img);
+        if (slides[0].caption) mediaEl.appendChild(captionEl);
+
+        if (slides.length > 1) {
+          const switcher = createEl("div", "modal-gallery-tabs");
+          slides.forEach((slide, idx) => {
+            const tabBtn = createEl(
+              "button",
+              idx === 0 ? "modal-gallery-tab is-active" : "modal-gallery-tab",
+              slide.label || `Shot 0${idx + 1}`
+            );
+            tabBtn.type = "button";
+            tabBtn.addEventListener("click", () => {
+              applySlide(slide, idx);
+              switcher.querySelectorAll(".modal-gallery-tab").forEach((other) => {
+                other.classList.toggle("is-active", other === tabBtn);
+              });
+            });
+            switcher.appendChild(tabBtn);
+          });
+          mediaEl.appendChild(switcher);
+        }
+
+        mediaEl.removeAttribute("hidden");
+      } else {
+        mediaEl.setAttribute("hidden", "");
+      }
+    }
+
+    setModalText("modal-index", item.index);
+    setModalText("modal-year", item.year);
+    setModalText("modal-category", item.category);
+    setModalText("modal-title", item.title);
+    setModalText("modal-tagline", item.tagline);
+    setModalText("modal-problem", item.problem);
+    setModalText("modal-solution", item.solution);
+
+    const delivEl = document.getElementById("modal-deliverables");
+    if (delivEl) {
+      delivEl.textContent = "";
+      (item.deliverables || []).forEach((d) => {
+        delivEl.appendChild(createEl("li", null, d));
+      });
+    }
+
+    const tagsEl = document.getElementById("modal-tags");
+    if (tagsEl) {
+      tagsEl.textContent = "";
+      (item.tags || []).forEach((t) => {
+        tagsEl.appendChild(createEl("span", "edu-chip", t));
+      });
+    }
+
+    const linksEl = document.getElementById("modal-links");
+    if (linksEl) {
+      linksEl.textContent = "";
+      if (item.githubUrl) {
+        const gh = createEl("a", "project-detail-btn", "GitHub Repository ↗");
+        gh.href = item.githubUrl;
+        gh.target = "_blank";
+        gh.rel = "noopener noreferrer";
+        linksEl.appendChild(gh);
+      }
+      if (item.liveUrl) {
+        const live = createEl("a", "project-detail-btn", "Live Demo ↗");
+        live.href = item.liveUrl;
+        live.target = "_blank";
+        live.rel = "noopener noreferrer";
+        linksEl.appendChild(live);
+      }
+      linksEl.style.display = linksEl.childElementCount ? "flex" : "none";
+    }
+
+    projectModal.removeAttribute("hidden");
+    projectModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    if (modalCloseBtn) modalCloseBtn.focus();
+  }
+
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener("click", closeProjectModal);
+  }
+  if (projectModal) {
+    projectModal.addEventListener("click", (e) => {
+      if (e.target === projectModal) closeProjectModal();
+    });
+  }
+
+  function renderProjects() {
+    const projects = config.projectsSection;
+    if (!projects) return;
+
+    const eyebrowEl = document.getElementById("projects-eyebrow");
+    const titleEl = document.getElementById("projects-title");
+    const filtersEl = document.getElementById("project-filters");
+    const gridEl = document.getElementById("projects-grid");
+
+    if (eyebrowEl && projects.eyebrow) eyebrowEl.textContent = projects.eyebrow;
+    if (titleEl && projects.titleHTML) titleEl.innerHTML = projects.titleHTML;
+
+    if (gridEl && Array.isArray(projects.items)) {
+      gridEl.textContent = "";
+      projects.items.forEach((item) => {
+        const cardClass = item.featured
+          ? "project-card project-card--featured reveal-on-scroll"
+          : "project-card reveal-on-scroll";
+        const card = createEl("article", cardClass);
+        card.setAttribute("data-project-group", item.filter || "all");
+
+        // Preview frame
+        const preview = createEl("div", "project-preview");
+        if (item.imageUrl) {
+          const img = document.createElement("img");
+          img.src = item.imageUrl;
+          img.alt = `${item.title} preview`;
+          img.loading = "lazy";
+          if (item.previewPosition) img.style.objectPosition = item.previewPosition;
+          preview.appendChild(img);
+          if (Array.isArray(item.gallery) && item.gallery.length > 1) {
+            const shotBadge = createEl(
+              "span",
+              "preview-shot-badge mono",
+              `${item.gallery.length} Screenshots`
+            );
+            preview.appendChild(shotBadge);
+          }
+          preview.style.cursor = "pointer";
+          preview.addEventListener("click", () => openProjectModal(item));
+        } else {
+          preview.appendChild(buildProjectMock(item));
+        }
+        card.appendChild(preview);
+
+        // Body
+        const body = createEl("div", "project-body");
+        const top = createEl("div", "project-meta-top");
+        const idxGroup = createEl("div", "project-index-group");
+        idxGroup.appendChild(createEl("span", "project-index mono", item.index));
+        idxGroup.appendChild(createEl("span", "meta-sep", "/"));
+        idxGroup.appendChild(createEl("span", "project-year mono tabular", item.year));
+        top.appendChild(idxGroup);
+
+        if (item.category) {
+          top.appendChild(createEl("span", "project-cat", item.category));
+        }
+        body.appendChild(top);
+
+        body.appendChild(createEl("h3", "project-title", item.title));
+        body.appendChild(createEl("p", "project-tagline", item.tagline));
+
+        if (Array.isArray(item.tags) && item.tags.length) {
+          const tagList = createEl("div", "project-tags");
+          item.tags.forEach((tag) => {
+            tagList.appendChild(createEl("span", "edu-chip", tag));
+          });
+          body.appendChild(tagList);
+        }
+
+        const actions = createEl("div", "project-actions");
+        const detailBtn = createEl("button", "project-detail-btn", "View Case Study →");
+        detailBtn.type = "button";
+        detailBtn.addEventListener("click", () => openProjectModal(item));
+        actions.appendChild(detailBtn);
+
+        const extLinks = createEl("div", "project-links");
+        if (item.githubUrl) {
+          const ghLink = createEl("a", "project-ext-link", "GitHub ↗");
+          ghLink.href = item.githubUrl;
+          ghLink.target = "_blank";
+          ghLink.rel = "noopener noreferrer";
+          extLinks.appendChild(ghLink);
+        }
+        if (item.liveUrl) {
+          const liveLink = createEl("a", "project-ext-link", "Live ↗");
+          liveLink.href = item.liveUrl;
+          liveLink.target = "_blank";
+          liveLink.rel = "noopener noreferrer";
+          extLinks.appendChild(liveLink);
+        }
+        actions.appendChild(extLinks);
+        body.appendChild(actions);
+
+        card.appendChild(body);
+        gridEl.appendChild(card);
+      });
+    }
+
+    if (filtersEl && Array.isArray(projects.filters) && gridEl) {
+      filtersEl.textContent = "";
+      projects.filters.forEach((filter, idx) => {
+        const btn = createEl(
+          "button",
+          idx === 0 ? "skill-filter-btn is-active" : "skill-filter-btn",
+          filter.label
+        );
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", String(idx === 0));
+
+        btn.addEventListener("click", () => {
+          filtersEl.querySelectorAll(".skill-filter-btn").forEach((other) => {
+            const active = other === btn;
+            other.classList.toggle("is-active", active);
+            other.setAttribute("aria-selected", String(active));
+          });
+
+          gridEl.querySelectorAll(".project-card").forEach((card) => {
+            const match =
+              filter.id === "all" || card.getAttribute("data-project-group") === filter.id;
+            card.classList.toggle("is-hidden", !match);
+            if (match) card.classList.add("is-visible");
+          });
+        });
+
+        filtersEl.appendChild(btn);
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -765,6 +1085,7 @@
       copyEmail();
     } else if (key === "escape") {
       setDrawerState(false);
+      closeProjectModal();
     }
   });
 
