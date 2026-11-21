@@ -942,9 +942,10 @@ button {
 
 .edu-layout {
   display: grid;
-  grid-template-columns: 270px 1fr;
-  gap: clamp(1.75rem, 3.5vw, 3rem);
+  grid-template-columns: minmax(180px, 230px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: start;
+  max-width: 100%;
 }
 
 .edu-sidebar {
@@ -978,7 +979,10 @@ button {
 .edu-content {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
 }
 
 .edu-list {
@@ -2548,9 +2552,12 @@ a.contact-channel-val:hover {
   background-color: var(--surface);
   border: 1px solid var(--hairline);
   border-radius: 16px;
-  padding: clamp(1.4rem, 2.8vw, 2rem);
+  padding: clamp(1.2rem, 2.2vw, 1.75rem);
   box-shadow: 0 20px 44px -24px rgba(2, 6, 23, 0.6);
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   transition: border-color 0.28s var(--ease-out), box-shadow 0.28s var(--ease-out);
 }
 
@@ -2650,7 +2657,7 @@ a.contact-channel-val:hover {
   border-collapse: collapse;
   font-family: var(--font-sans);
   text-align: left;
-  min-width: 740px;
+  min-width: 620px;
 }
 
 .edu-table thead tr {
@@ -2673,25 +2680,25 @@ a.contact-channel-val:hover {
 }
 
 .edu-table th.th-degree {
-  min-width: 250px;
+  min-width: 190px;
 }
 
 .edu-table th.th-inst {
-  min-width: 230px;
+  min-width: 170px;
 }
 
 .edu-table th.th-board {
-  min-width: 110px;
+  min-width: 85px;
   text-align: center;
 }
 
 .edu-table th.th-year {
-  min-width: 120px;
+  min-width: 95px;
   text-align: center;
 }
 
 .edu-table th.th-result {
-  min-width: 140px;
+  min-width: 110px;
   text-align: right;
   padding-right: 1.25rem;
 }
