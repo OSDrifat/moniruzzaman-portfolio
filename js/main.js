@@ -1306,7 +1306,7 @@
       revealEls.forEach((el) => revealObserver.observe(el));
     }
 
-    // Sync floating dock indicator when scrolling between sections
+    // Sync floating dock indicator precisely when scrolling between sections
     const sectionMap = [
       { el: document.getElementById("top"), label: "Home" },
       { el: document.getElementById("education"), label: "Education" },
@@ -1315,38 +1315,58 @@
       { el: document.getElementById("contact"), label: "Contact" }
     ].filter((item) => item.el);
 
-    if (sectionMap.length && "IntersectionObserver" in window) {
-      const sectionObserver = new IntersectionObserver(
-        (entries) => {
-          const isAtBottom =
-            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70;
-          if (isAtBottom && document.getElementById("contact")) {
-            setActiveNavItem("Contact");
-            return;
-          }
+    function updateActiveSection() {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
 
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const found = sectionMap.find((item) => item.el === entry.target);
-            if (found) setActiveNavItem(found.label);
-          });
-        },
-        { rootMargin: "-25% 0px -40% 0px", threshold: [0, 0.15] }
-      );
-      sectionMap.forEach((item) => sectionObserver.observe(item.el));
+      // 1. If at the very top of the page, activate Home
+      if (scrollY < 120) {
+        setActiveNavItem("Home");
+        return;
+      }
 
-      window.addEventListener(
-        "scroll",
-        () => {
-          const isAtBottom =
-            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70;
-          if (isAtBottom && document.getElementById("contact")) {
-            setActiveNavItem("Contact");
-          }
-        },
-        { passive: true }
-      );
+      // 2. If scrolled near the bottom, activate Contact
+      if (scrollY + windowHeight >= docHeight - 80) {
+        if (document.getElementById("contact")) {
+          setActiveNavItem("Contact");
+          return;
+        }
+      }
+
+      // 3. Find the current active section (target viewing offset ~180px from top)
+      const targetOffset = 180;
+      let active = sectionMap[0];
+
+      for (let i = 0; i < sectionMap.length; i++) {
+        const item = sectionMap[i];
+        const rect = item.el.getBoundingClientRect();
+        if (rect.top <= targetOffset) {
+          active = item;
+        }
+      }
+
+      if (active) {
+        setActiveNavItem(active.label);
+      }
     }
+
+    let scrollTicking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(() => {
+            updateActiveSection();
+            scrollTicking = false;
+          });
+          scrollTicking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    updateActiveSection();
   }
 
   // Initialize

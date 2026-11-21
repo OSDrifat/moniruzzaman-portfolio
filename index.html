@@ -27,7 +27,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="css/styles.css?v=36" />
+  <link rel="stylesheet" href="css/styles.css?v=40" />
 </head>
 <body>
   <!-- Subtle paper-grain texture -->
@@ -232,7 +232,128 @@
 
         <!-- Right Academic Ledger -->
         <div class="edu-content">
-          <div class="edu-list" id="edu-list"></div>
+                    <!-- Academic Performance Summary Table (HTML Table Requirement) -->
+          <div class="edu-table-card reveal-on-scroll">
+            <div class="edu-table-header">
+              <div class="edu-table-header-left">
+                <span class="mono edu-table-tag">Academic Ledger</span>
+                <h3 class="edu-table-title">Academic Qualifications &amp; Credentials</h3>
+              </div>
+              <div class="edu-table-header-right">
+                <span class="edu-table-stat mono">
+                  <span class="status-dot status-dot--active" aria-hidden="true"></span>
+                  3 Verified Records
+                </span>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="edu-table">
+                <thead>
+                  <tr class="edu-table-thead-row">
+                    <th scope="col" class="th-degree mono">
+                      <span class="th-pill th-pill--blue">Degree / Certificate</span>
+                    </th>
+                    <th scope="col" class="th-inst mono">
+                      <span class="th-pill th-pill--teal">Institution</span>
+                    </th>
+                    <th scope="col" class="th-board mono">
+                      <span class="th-pill th-pill--purple">Board / University</span>
+                    </th>
+                    <th scope="col" class="th-year mono">
+                      <span class="th-pill th-pill--amber">Passing Year</span>
+                    </th>
+                    <th scope="col" class="th-result mono">
+                      <span class="th-pill th-pill--green">Result / GPA</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="edu-table-row">
+                    <td class="td-degree">
+                      <div class="edu-degree-meta">
+                        <span class="edu-badge-num mono">01</span>
+                        <div class="edu-degree-text">
+                          <strong class="edu-degree-strong">B.Sc. in Computer Science &amp; Engineering</strong>
+                          <span class="edu-sub-text">Focus on Software Engineering &amp; SQA</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="td-inst">
+                      <div class="edu-inst-wrap">
+                        <span class="edu-inst-name">Daffodil International University</span>
+                        <span class="edu-inst-loc mono">Dhaka, Bangladesh</span>
+                      </div>
+                    </td>
+                    <td class="td-board">
+                      <span class="edu-board-pill">DIU</span>
+                    </td>
+                    <td class="td-year">
+                      <span class="edu-year-pill mono tabular">2023 — 2026</span>
+                    </td>
+                    <td class="td-result">
+                      <span class="edu-table-badge edu-table-badge--ongoing">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        Ongoing
+                      </span>
+                    </td>
+                  </tr>
+                  <tr class="edu-table-row">
+                    <td class="td-degree">
+                      <div class="edu-degree-meta">
+                        <span class="edu-badge-num mono">02</span>
+                        <div class="edu-degree-text">
+                          <strong class="edu-degree-strong">Higher Secondary Certificate (HSC)</strong>
+                          <span class="edu-sub-text">Science Stream · Higher Math &amp; ICT</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="td-inst">
+                      <div class="edu-inst-wrap">
+                        <span class="edu-inst-name">Border Guard Public School &amp; College</span>
+                        <span class="edu-inst-loc mono">Rangpur, Bangladesh</span>
+                      </div>
+                    </td>
+                    <td class="td-board">
+                      <span class="edu-board-pill">Dinajpur</span>
+                    </td>
+                    <td class="td-year">
+                      <span class="edu-year-pill mono tabular">2019 — 2020</span>
+                    </td>
+                    <td class="td-result">
+                      <span class="edu-table-badge edu-table-badge--gpa">GPA 5.00 / 5.00</span>
+                    </td>
+                  </tr>
+                  <tr class="edu-table-row">
+                    <td class="td-degree">
+                      <div class="edu-degree-meta">
+                        <span class="edu-badge-num mono">03</span>
+                        <div class="edu-degree-text">
+                          <strong class="edu-degree-strong">Secondary School Certificate (SSC)</strong>
+                          <span class="edu-sub-text">Science Stream · Mathematics</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="td-inst">
+                      <div class="edu-inst-wrap">
+                        <span class="edu-inst-name">Bir Uttam Shaheed Samad School &amp; College</span>
+                        <span class="edu-inst-loc mono">Rangpur, Bangladesh</span>
+                      </div>
+                    </td>
+                    <td class="td-board">
+                      <span class="edu-board-pill">Dinajpur</span>
+                    </td>
+                    <td class="td-year">
+                      <span class="edu-year-pill mono tabular">2017 — 2018</span>
+                    </td>
+                    <td class="td-result">
+                      <span class="edu-table-badge edu-table-badge--gpa">GPA 5.00 / 5.00</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -520,8 +641,8 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=36"></script>
-  <script src="js/main.js?v=36"></script>
+  <script src="js/config.js?v=40"></script>
+  <script src="js/main.js?v=40"></script>
 </body>
 </html>
 
