@@ -91,6 +91,7 @@
     renderEducation();
     renderSkills();
     renderProjects();
+    renderContact();
 
     // Social links
     if (config.socials) {
@@ -857,6 +858,173 @@
     orbitAnimId = requestAnimationFrame(tick);
   }
 
+
+  // ---------------------------------------------------------------------------
+  // 1d. Contact Section & Interactive Message Form
+  // ---------------------------------------------------------------------------
+  function renderContact() {
+    const contact = config.contactSection;
+    if (!contact) return;
+
+    const eyebrowEl = document.getElementById("contact-eyebrow");
+    const titleEl = document.getElementById("contact-title");
+    const leadEl = document.getElementById("contact-lead");
+    const emailLinkEl = document.getElementById("contact-email-link");
+    const copyBtn = document.getElementById("contact-copy-btn");
+    const copyText = document.getElementById("contact-copy-text");
+    const socialsListEl = document.getElementById("contact-socials-list");
+    const liveClockEl = document.getElementById("contact-live-clock");
+    const form = document.getElementById("contact-form");
+    const formStatus = document.getElementById("contact-form-status");
+
+    if (eyebrowEl && contact.eyebrow) eyebrowEl.textContent = contact.eyebrow;
+    if (titleEl && contact.titleHTML) titleEl.innerHTML = contact.titleHTML;
+    if (leadEl && contact.lead) leadEl.textContent = contact.lead;
+
+    const targetEmail = contact.email || config.email || "rifat.cse.dev@gmail.com";
+    if (emailLinkEl) {
+      emailLinkEl.textContent = targetEmail;
+      emailLinkEl.href = `mailto:${targetEmail}`;
+    }
+
+    // Sync contact live clock with header clock
+    if (liveClockEl) {
+      function updateContactClock() {
+        try {
+          const now = new Date();
+          const str = now.toLocaleTimeString("en-GB", {
+            timeZone: config.timezone || "Asia/Dhaka",
+            hour12: false
+          });
+          liveClockEl.textContent = `${str} GMT+6`;
+        } catch (e) {
+          liveClockEl.textContent = "Dhaka Time";
+        }
+      }
+      updateContactClock();
+      setInterval(updateContactClock, 1000);
+    }
+
+    // 1-Click Copy Email to Clipboard
+    if (copyBtn) {
+      let copyTimeout = null;
+      copyBtn.addEventListener("click", async () => {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(targetEmail);
+          } else {
+            const ta = document.createElement("textarea");
+            ta.value = targetEmail;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+          }
+
+          copyBtn.classList.add("is-copied");
+          const idleIcon = copyBtn.querySelector(".copy-icon-idle");
+          const doneIcon = copyBtn.querySelector(".copy-icon-done");
+          if (idleIcon) idleIcon.hidden = true;
+          if (doneIcon) doneIcon.hidden = false;
+          if (copyText) copyText.textContent = "Copied!";
+
+          clearTimeout(copyTimeout);
+          copyTimeout = setTimeout(() => {
+            copyBtn.classList.remove("is-copied");
+            if (idleIcon) idleIcon.hidden = false;
+            if (doneIcon) doneIcon.hidden = true;
+            if (copyText) copyText.textContent = "Copy";
+          }, 2200);
+        } catch (err) {
+          console.error("Failed to copy email:", err);
+          if (copyText) copyText.textContent = "Failed";
+        }
+      });
+    }
+
+    // Render Social Profile Pills
+    if (socialsListEl && Array.isArray(contact.socials)) {
+      socialsListEl.textContent = "";
+      contact.socials.forEach((item) => {
+        const a = createEl("a", "contact-social-pill");
+        a.href = item.url || "#";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.appendChild(createEl("span", "", item.name));
+
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 24 24");
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("stroke", "currentColor");
+        svg.setAttribute("stroke-width", "1.8");
+        const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        l.setAttribute("x1", "7"); l.setAttribute("y1", "17"); l.setAttribute("x2", "17"); l.setAttribute("y2", "7");
+        const p = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+        p.setAttribute("points", "7 7 17 7 17 17");
+        svg.appendChild(l);
+        svg.appendChild(p);
+        a.appendChild(svg);
+
+        socialsListEl.appendChild(a);
+      });
+    }
+
+    // Interactive Message Form Submit Handler
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const nameInput = form.querySelector("#contact-name");
+        const emailInput = form.querySelector("#contact-sender-email");
+        const subjectInput = form.querySelector("#contact-subject");
+        const messageInput = form.querySelector("#contact-message");
+
+        const name = (nameInput ? nameInput.value : "").trim();
+        const email = (emailInput ? emailInput.value : "").trim();
+        const subject = (subjectInput ? subjectInput.value : "").trim();
+        const message = (messageInput ? messageInput.value : "").trim();
+
+        if (!name || !email || !subject || !message) {
+          if (formStatus) {
+            formStatus.textContent = "Please fill in all required fields.";
+            formStatus.className = "form-status mono is-error";
+          }
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          if (formStatus) {
+            formStatus.textContent = "Please enter a valid email address.";
+            formStatus.className = "form-status mono is-error";
+          }
+          return;
+        }
+
+        const mailSubject = encodeURIComponent(`[Portfolio] ${subject} - from ${name}`);
+        const mailBody = encodeURIComponent(
+          `Hi Md. Moniruzzaman Rifat,\n\n${message}\n\n---\nSender Name: ${name}\nSender Email: ${email}`
+        );
+
+        const mailtoUrl = `mailto:${targetEmail}?subject=${mailSubject}&body=${mailBody}`;
+
+        if (formStatus) {
+          formStatus.textContent = "Opening your email client...";
+          formStatus.className = "form-status mono is-success";
+        }
+
+        window.location.href = mailtoUrl;
+
+        setTimeout(() => {
+          if (formStatus) {
+            formStatus.textContent = "Email draft prepared! You can also copy my email directly.";
+          }
+        }, 1200);
+      });
+    }
+  }
+
   // ---------------------------------------------------------------------------
   // 2. Theme Toggle (Light Warm Paper <-> Dark Warm Obsidian)
   // ---------------------------------------------------------------------------
@@ -1143,21 +1311,41 @@
       { el: document.getElementById("top"), label: "Home" },
       { el: document.getElementById("education"), label: "Education" },
       { el: document.getElementById("skills"), label: "Skills" },
-      { el: document.getElementById("projects"), label: "Projects" }
+      { el: document.getElementById("projects"), label: "Projects" },
+      { el: document.getElementById("contact"), label: "Contact" }
     ].filter((item) => item.el);
 
     if (sectionMap.length && "IntersectionObserver" in window) {
       const sectionObserver = new IntersectionObserver(
         (entries) => {
+          const isAtBottom =
+            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70;
+          if (isAtBottom && document.getElementById("contact")) {
+            setActiveNavItem("Contact");
+            return;
+          }
+
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             const found = sectionMap.find((item) => item.el === entry.target);
             if (found) setActiveNavItem(found.label);
           });
         },
-        { rootMargin: "-35% 0px -45% 0px", threshold: 0 }
+        { rootMargin: "-25% 0px -40% 0px", threshold: [0, 0.15] }
       );
       sectionMap.forEach((item) => sectionObserver.observe(item.el));
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          const isAtBottom =
+            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70;
+          if (isAtBottom && document.getElementById("contact")) {
+            setActiveNavItem("Contact");
+          }
+        },
+        { passive: true }
+      );
     }
   }
 

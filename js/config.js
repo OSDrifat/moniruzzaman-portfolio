@@ -294,6 +294,20 @@ window.SITE_CONFIG = {
         liveUrl: ""
       }
     ]
+  },
+  // ---------------------------------------------------------------------------
+  // Contact Section
+  // ---------------------------------------------------------------------------
+  contactSection: {
+    eyebrow: "04 / Connect",
+    titleHTML: "Let's <em>Connect</em>",
+    lead: "Open for Software Quality Assurance & Testing opportunities, defect lifecycle analysis, test automation, or tech discussions. Let's build reliable software together.",
+    email: "rifat.cse.dev@gmail.com",
+    location: "Dhaka, Bangladesh",
+    availability: "Available for SQA / QA Engineer Roles & Remote Projects",
+    socials: [
+      { name: "GitHub", url: "https://github.com/OSDrifat" },
+      { name: "LinkedIn", url: "https://linkedin.com" }
+    ]
   }
 };
-
