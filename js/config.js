@@ -37,8 +37,9 @@ window.SITE_CONFIG = {
   coreStack: "Manual Testing · API Testing · Test Automation · Bug Tracking",
 
   socials: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/OSDrifat?tab=overview&from=2026-10-01&to=2026-10-21",
+    linkedin: "https://www.linkedin.com/in/md-moniruzzaman-rifat-4876a92b9/",
+    phone: "+8801785468366",
     x: "https://x.com"
   },
 
@@ -303,11 +304,14 @@ window.SITE_CONFIG = {
     titleHTML: "Let's <em>Connect</em>",
     lead: "Open for Software Quality Assurance & Testing opportunities, defect lifecycle analysis, test automation, or tech discussions. Let's build reliable software together.",
     email: "rifat.cse.dev@gmail.com",
+    phone: "+880 1785-468366",
+    phoneRaw: "+8801785468366",
+    whatsappUrl: "https://wa.me/8801785468366",
     location: "Dhaka, Bangladesh",
     availability: "Available for SQA / QA Engineer Roles & Remote Projects",
     socials: [
-      { name: "GitHub", url: "https://github.com/OSDrifat" },
-      { name: "LinkedIn", url: "https://linkedin.com" }
+      { name: "GitHub", url: "https://github.com/OSDrifat?tab=overview&from=2026-10-01&to=2026-10-21" },
+      { name: "LinkedIn", url: "https://www.linkedin.com/in/md-moniruzzaman-rifat-4876a92b9/" }
     ]
   }
 };

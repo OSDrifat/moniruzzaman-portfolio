@@ -2329,6 +2329,90 @@ a.contact-channel-val:hover {
   height: 14px;
 }
 
+.contact-channel-val-group {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.contact-wa-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background-color: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.32);
+  color: #4ade80;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s var(--ease-out);
+}
+
+.contact-wa-pill:hover {
+  background-color: rgba(34, 197, 94, 0.24);
+  border-color: rgba(34, 197, 94, 0.6);
+  color: #86efac;
+  transform: translateY(-1px);
+}
+
+.contact-wa-pill .wa-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+}
+
+.contact-channel-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.38rem 0.72rem;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--surface-hover) 85%, transparent);
+  border: 1px solid var(--hairline-strong);
+  color: var(--ink-muted);
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.2s var(--ease-out);
+  flex-shrink: 0;
+}
+
+.contact-channel-action-btn:hover {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.contact-channel-action-btn svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s var(--ease-out);
+}
+
+.contact-channel-action-btn:hover svg {
+  transform: translate(1px, -1px);
+}
+
+.contact-icon-phone {
+  background-color: rgba(16, 185, 129, 0.14) !important;
+  color: #34d399 !important;
+}
+
+.contact-icon-linkedin {
+  background-color: rgba(10, 102, 194, 0.16) !important;
+  color: #38bdf8 !important;
+}
+
+.contact-icon-github {
+  background-color: rgba(168, 85, 247, 0.16) !important;
+  color: #c084fc !important;
+}
+
 .contact-socials-row {
   display: flex;
   align-items: center;
@@ -2506,6 +2590,24 @@ a.contact-channel-val:hover {
 
 .footer-dot {
   color: var(--hairline-strong);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.8rem;
+}
+
+.footer-link {
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.2s var(--ease-out);
+}
+
+.footer-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .back-to-top {

@@ -887,6 +887,26 @@
       emailLinkEl.href = `mailto:${targetEmail}`;
     }
 
+    const phoneLinkEl = document.getElementById("contact-phone-link");
+    const copyPhoneBtn = document.getElementById("contact-copy-phone-btn");
+    const copyPhoneText = document.getElementById("contact-copy-phone-text");
+    const targetPhoneRaw = contact.phoneRaw || "+8801785468366";
+    const targetPhoneDisplay = contact.phone || "+880 1785-468366";
+    if (phoneLinkEl) {
+      phoneLinkEl.textContent = targetPhoneDisplay;
+      phoneLinkEl.href = `tel:${targetPhoneRaw}`;
+    }
+
+    const linkedinLinkEl = document.getElementById("contact-linkedin-link");
+    if (linkedinLinkEl && config.socials && config.socials.linkedin) {
+      linkedinLinkEl.href = config.socials.linkedin;
+    }
+
+    const githubLinkEl = document.getElementById("contact-github-link");
+    if (githubLinkEl && config.socials && config.socials.github) {
+      githubLinkEl.href = config.socials.github;
+    }
+
     // Sync contact live clock with header clock
     if (liveClockEl) {
       function updateContactClock() {
@@ -940,6 +960,45 @@
         } catch (err) {
           console.error("Failed to copy email:", err);
           if (copyText) copyText.textContent = "Failed";
+        }
+      });
+    }
+
+    // 1-Click Copy Phone to Clipboard
+    if (copyPhoneBtn) {
+      let copyPhoneTimeout = null;
+      copyPhoneBtn.addEventListener("click", async () => {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(targetPhoneRaw);
+          } else {
+            const ta = document.createElement("textarea");
+            ta.value = targetPhoneRaw;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+          }
+
+          copyPhoneBtn.classList.add("is-copied");
+          const idleIcon = copyPhoneBtn.querySelector(".copy-icon-idle");
+          const doneIcon = copyPhoneBtn.querySelector(".copy-icon-done");
+          if (idleIcon) idleIcon.hidden = true;
+          if (doneIcon) doneIcon.hidden = false;
+          if (copyPhoneText) copyPhoneText.textContent = "Copied!";
+
+          clearTimeout(copyPhoneTimeout);
+          copyPhoneTimeout = setTimeout(() => {
+            copyPhoneBtn.classList.remove("is-copied");
+            if (idleIcon) idleIcon.hidden = false;
+            if (doneIcon) doneIcon.hidden = true;
+            if (copyPhoneText) copyPhoneText.textContent = "Copy";
+          }, 2200);
+        } catch (err) {
+          console.error("Failed to copy phone:", err);
+          if (copyPhoneText) copyPhoneText.textContent = "Failed";
         }
       });
     }
