@@ -977,12 +977,18 @@
         e.preventDefault();
         const nameInput = form.querySelector("#contact-name");
         const emailInput = form.querySelector("#contact-sender-email");
+        const inquiryInput = form.querySelector("#contact-inquiry");
         const subjectInput = form.querySelector("#contact-subject");
+        const timelineInput = form.querySelector('input[name="timeline"]:checked');
+        const sendCopyInput = form.querySelector("#contact-send-copy");
         const messageInput = form.querySelector("#contact-message");
 
         const name = (nameInput ? nameInput.value : "").trim();
         const email = (emailInput ? emailInput.value : "").trim();
+        const inquiry = (inquiryInput ? inquiryInput.value : "").trim();
         const subject = (subjectInput ? subjectInput.value : "").trim();
+        const timeline = timelineInput ? timelineInput.value : "Flexible";
+        const sendCopy = sendCopyInput ? sendCopyInput.checked : false;
         const message = (messageInput ? messageInput.value : "").trim();
 
         if (!name || !email || !subject || !message) {
@@ -1002,9 +1008,9 @@
           return;
         }
 
-        const mailSubject = encodeURIComponent(`[Portfolio] ${subject} - from ${name}`);
+        const mailSubject = encodeURIComponent(`[${inquiry || 'Inquiry'}] ${subject} - from ${name}`);
         const mailBody = encodeURIComponent(
-          `Hi Md. Moniruzzaman Rifat,\n\n${message}\n\n---\nSender Name: ${name}\nSender Email: ${email}`
+          `Hi Md. Moniruzzaman Rifat,\n\n${message}\n\n---\nSender Details:\nName: ${name}\nEmail: ${email}\nInquiry Type: ${inquiry || 'N/A'}\nTimeline: ${timeline}\nSend Copy Requested: ${sendCopy ? 'Yes' : 'No'}`
         );
 
         const mailtoUrl = `mailto:${targetEmail}?subject=${mailSubject}&body=${mailBody}`;

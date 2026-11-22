@@ -27,7 +27,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="css/styles.css?v=41" />
+  <link rel="stylesheet" href="css/styles.css?v=42" />
 </head>
 <body>
   <!-- Subtle paper-grain texture -->
@@ -521,16 +521,55 @@
               </div>
             </div>
 
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-inquiry" class="form-label mono">Inquiry Type <span class="req">*</span></label>
+                <div class="select-wrapper">
+                  <select id="contact-inquiry" name="inquiry" class="form-select" required>
+                    <option value="" disabled selected>Select inquiry type...</option>
+                    <option value="SQA / QA Engineer Job Opportunity">SQA / QA Engineer Job Opportunity</option>
+                    <option value="Freelance Software Testing / Consulting">Freelance Software Testing / QA Consulting</option>
+                    <option value="Project Collaboration">Project Collaboration &amp; Development</option>
+                    <option value="General Tech Discussion">General Tech Discussion / Mentorship</option>
+                  </select>
+                  <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contact-subject" class="form-label mono">Subject <span class="req">*</span></label>
+                <input
+                  type="text"
+                  id="contact-subject"
+                  name="subject"
+                  class="form-input"
+                  placeholder="e.g. QA Automation Inquiry"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Radio Group: Timeline / Urgency (Part-C Requirement) -->
             <div class="form-group">
-              <label for="contact-subject" class="form-label mono">Subject <span class="req">*</span></label>
-              <input
-                type="text"
-                id="contact-subject"
-                name="subject"
-                class="form-input"
-                placeholder="e.g. SQA Engineer Opportunity / Project Inquiry"
-                required
-              />
+              <span class="form-label mono">Expected Timeline <span class="req">*</span></span>
+              <div class="form-radios" role="radiogroup" aria-label="Expected Project Timeline">
+                <label class="radio-label" for="time-immediate">
+                  <input type="radio" id="time-immediate" name="timeline" value="Immediate (< 1 week)" checked class="radio-input" />
+                  <span class="radio-custom" aria-hidden="true"></span>
+                  <span class="radio-text">Immediate (&lt; 1 week)</span>
+                </label>
+                <label class="radio-label" for="time-month">
+                  <input type="radio" id="time-month" name="timeline" value="1 — 4 Weeks" class="radio-input" />
+                  <span class="radio-custom" aria-hidden="true"></span>
+                  <span class="radio-text">1 — 4 Weeks</span>
+                </label>
+                <label class="radio-label" for="time-flexible">
+                  <input type="radio" id="time-flexible" name="timeline" value="Flexible / Exploring" class="radio-input" />
+                  <span class="radio-custom" aria-hidden="true"></span>
+                  <span class="radio-text">Flexible / Exploring</span>
+                </label>
+              </div>
             </div>
 
             <div class="form-group">
@@ -543,6 +582,19 @@
                 placeholder="Tell me about your team, project requirements, or what you'd like to collaborate on..."
                 required
               ></textarea>
+            </div>
+
+            <!-- Checkbox: Send Copy (Part-C Requirement) -->
+            <div class="form-group form-checkbox-group">
+              <label class="checkbox-label" for="contact-send-copy">
+                <input type="checkbox" id="contact-send-copy" name="send_copy" class="checkbox-input" />
+                <span class="checkbox-custom" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span class="checkbox-text">Send a confirmation copy of this message to my email</span>
+              </label>
             </div>
 
             <div class="form-footer">
@@ -641,8 +693,8 @@
     </div>
   </div>
 
-  <script src="js/config.js?v=41"></script>
-  <script src="js/main.js?v=41"></script>
+  <script src="js/config.js?v=42"></script>
+  <script src="js/main.js?v=42"></script>
 </body>
 </html>
 
