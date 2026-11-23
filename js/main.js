@@ -37,9 +37,11 @@
 
     const dockCv = document.getElementById("dock-cv");
     if (dockCv && config.resumeUrl && config.resumeUrl !== "#") {
-      dockCv.href = config.resumeUrl;
-      dockCv.target = "_blank";
-      dockCv.rel = "noopener noreferrer";
+      if (document.body.dataset.page === "home") {
+        dockCv.href = "#cv";
+      } else {
+        dockCv.href = config.resumeUrl;
+      }
     }
 
     if ((config.fullName || config.brandName) && config.role) {
@@ -1377,7 +1379,8 @@
       { el: document.getElementById("education"), label: "Education" },
       { el: document.getElementById("skills"), label: "Skills" },
       { el: document.getElementById("projects"), label: "Projects" },
-      { el: document.getElementById("contact"), label: "Contact" }
+      { el: document.getElementById("cv"), label: "CV" },
+      { el: document.getElementById("contact"), label: "Contact" },
     ].filter((item) => item.el);
 
     function updateActiveSection() {

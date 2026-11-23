@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curriculum Vitae — Md. Moniruzzaman Rifat</title>
+  <meta
+    name="description"
+    content="Professional Curriculum Vitae of Md. Moniruzzaman Rifat, Software Quality Assurance Engineer & CSE Undergraduate."
+  />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css?v=43" />
+
+  <style>
+    /* CV Page Custom Styles */
+    .cv-page-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-top: calc(var(--header-height) + 2rem);
+      padding-bottom: 4rem;
+    }
+
+    .cv-action-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-lg);
+      background-color: var(--surface);
+      border: 1px solid var(--hairline);
+    }
+
+    .cv-action-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cv-action-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .cv-action-sub {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+
+    .cv-action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s var(--ease-out);
+      font-family: var(--font-sans);
+    }
+
+    .cv-btn-download {
+      background-color: var(--accent);
+      color: var(--accent-ink);
+      border: 1px solid var(--accent);
+    }
+
+    .cv-btn-download:hover {
+      background-color: #1d4ed8;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .cv-btn-print {
+      background-color: color-mix(in srgb, var(--surface-hover) 85%, transparent);
+      color: var(--ink);
+      border: 1px solid var(--hairline-strong);
+    }
+
+    .cv-btn-print:hover {
+      background-color: var(--surface-hover);
+      border-color: var(--ink-muted);
+      transform: translateY(-1px);
+    }
+
+    .cv-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* CV Paper Sheet */
+    .cv-paper {
+      background-color: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--hairline);
+      padding: 3rem 3.25rem;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      color: var(--ink);
+    }
+
+    /* Header */
+    .cv-head {
+      border-bottom: 1.5px solid var(--hairline);
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .cv-name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .cv-tagline {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .cv-contacts-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+    }
+
+    .cv-contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .cv-contact-item a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s var(--ease-out);
+    }
+
+    .cv-contact-item a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .cv-contact-item svg {
+      width: 14px;
+      height: 14px;
+      color: var(--ink-faint);
+      flex-shrink: 0;
+    }
+
+    /* Sections */
+    .cv-sec {
+      margin-bottom: 1.75rem;
+    }
+
+    .cv-sec:last-child {
+      margin-bottom: 0;
+    }
+
+    .cv-sec-title {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cv-sec-title::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .cv-prose {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      text-align: justify;
+    }
+
+    /* Skills Table */
+    .cv-skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .cv-skills-table tr {
+      border-bottom: 1px dashed var(--hairline);
+    }
+
+    .cv-skills-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .cv-skills-cat {
+      width: 26%;
+      font-weight: 600;
+      color: var(--ink);
+      padding: 0.55rem 0.75rem 0.55rem 0;
+      vertical-align: top;
+    }
+
+    .cv-skills-val {
+      color: var(--ink-muted);
+      padding: 0.55rem 0;
+      line-height: 1.55;
+    }
+
+    /* Entry Block */
+    .cv-entry {
+      margin-bottom: 1.25rem;
+    }
+
+    .cv-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .cv-entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .cv-entry-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .cv-entry-role {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .cv-entry-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      white-space: nowrap;
+    }
+
+    .cv-tech-pills {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      background-color: color-mix(in srgb, var(--surface) 60%, var(--bg));
+      border: 1px solid var(--hairline);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.45rem;
+    }
+
+    .cv-list {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      font-size: 0.84rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .cv-list li {
+      margin-bottom: 0.3rem;
+    }
+
+    .cv-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .cv-edu-badge {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #34d399;
+      background-color: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    .cv-edu-badge--ongoing {
+      color: #60a5fa;
+      background-color: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+
+      .site-header,
+      .site-footer,
+      .cv-action-strip,
+      .grain-overlay,
+      .mobile-drawer {
+        display: none !important;
+      }
+
+      .cv-page-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .cv-paper {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      .cv-name, .cv-entry-title, .cv-skills-cat {
+        color: #000000 !important;
+      }
+
+      .cv-tagline, .cv-entry-role, .cv-sec-title {
+        color: #1d4ed8 !important;
+      }
+
+      .cv-prose, .cv-skills-val, .cv-list, .cv-contacts-grid {
+        color: #374151 !important;
+      }
+
+      .cv-contact-item a {
+        color: #000000 !important;
+      }
+
+      .cv-tech-pills {
+        background: #f3f4f6 !important;
+        border-color: #e5e7eb !important;
+        color: #374151 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .cv-edu-badge {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      @page {
+        size: A4;
+        margin: 12mm 15mm;
+      }
+    }
+  </style>
+</head>
+<body data-page="cv">
+  <!-- Subtle paper-grain texture -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- =======================================================================
+       Header / Floating Architectural Dock Navigation
+       ======================================================================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Home">
+        <span id="brand-name">Moniruzzaman</span><span class="brand-dot">.</span>
+      </a>
+
+      <nav class="nav-dock" aria-label="Primary Navigation">
+        <div class="dock-track" id="dock-track">
+          <span class="dock-indicator" id="dock-indicator" aria-hidden="true"></span>
+          <a href="index.html" class="dock-link">Home</a>
+          <a href="education.html" class="dock-link">Education</a>
+          <a href="index.html#skills" class="dock-link">Skills</a>
+          <a href="projects.html" class="dock-link">Projects</a>
+          <span class="dock-divider" aria-hidden="true"></span>
+          <a href="cv.html" class="dock-link is-active" aria-current="page" id="dock-cv">CV</a>
+          <a href="contact.html" class="dock-link">Contact</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="availability-pill" title="Current work status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="availability-text" id="availability-text">Available for projects</span>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="theme-toggle"
+          aria-label="Toggle color theme"
+          title="Toggle theme (T)"
+        >
+          <!-- Sun Icon -->
+          <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon -->
+          <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="icon-btn menu-toggle"
+          id="menu-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-drawer"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <line x1="4" y1="8" x2="20" y2="8"></line>
+            <line x1="4" y1="16" x2="20" y2="16"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div class="container mobile-drawer-inner">
+        <a href="index.html" class="drawer-link">Home</a>
+        <a href="education.html" class="drawer-link">Education</a>
+        <a href="index.html#skills" class="drawer-link">Skills</a>
+        <a href="projects.html" class="drawer-link">Projects</a>
+        <a href="cv.html" class="drawer-link is-active" aria-current="page">CV</a>
+        <a href="contact.html" class="drawer-link">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       Main Content — CV & Resume View
+       ======================================================================= -->
+  <main class="container cv-page-container">
+    <!-- Top Action Bar -->
+    <div class="cv-action-strip">
+      <div class="cv-action-left">
+        <h2 class="cv-action-title">Curriculum Vitae</h2>
+        <span class="cv-action-sub mono">Official SQA &amp; Software Engineering Resume</span>
+      </div>
+
+      <div class="cv-action-buttons">
+        <button type="button" class="cv-btn cv-btn-print" onclick="window.print()" title="Print A4 Clean Copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Print / Save PDF</span>
+        </button>
+
+        <a href="assets/Md_Moniruzzaman_Rifat_CV.pdf" download class="cv-btn cv-btn-download" title="Download compiled PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download PDF</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- CV Paper Container -->
+    <article class="cv-paper">
+      <!-- Header -->
+      <header class="cv-head">
+        <h1 class="cv-name">MD. MONIRUZZAMAN RIFAT</h1>
+        <p class="cv-tagline">Software Quality Assurance Engineer | CSE Undergraduate</p>
+
+        <div class="cv-contacts-grid">
+          <div class="cv-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <a href="tel:+8801785468366">+880 1785-468366</a>
+          </div>
+
+          <div class="cv-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <a href="mailto:rifat.cse.dev@gmail.com">rifat.cse.dev@gmail.com</a>
+          </div>
+
+          <div class="cv-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Dhaka, Bangladesh</span>
+          </div>
+
+          <div class="cv-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+            <a href="https://www.linkedin.com/in/md-moniruzzaman-rifat-4876a92b9/" target="_blank" rel="noopener noreferrer">linkedin.com/in/md-moniruzzaman-rifat</a>
+          </div>
+
+          <div class="cv-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <a href="https://github.com/OSDrifat" target="_blank" rel="noopener noreferrer">github.com/OSDrifat</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Professional Summary -->
+      <section class="cv-sec">
+        <h2 class="cv-sec-title">Professional Summary</h2>
+        <p class="cv-prose">
+          Detail-oriented Software Quality Assurance Engineer and Computer Science undergraduate with hands-on expertise in the Software Testing Life Cycle (STLC), test documentation, defect management, and API validation. Passionate about uncovering edge conditions early, structuring reproducible bug reports, and ensuring robust application reliability across cross-functional engineering teams.
+        </p>
+      </section>
+
+      <!-- Technical Skills -->
+      <section class="cv-sec">
+        <h2 class="cv-sec-title">Technical Expertise</h2>
+        <table class="cv-skills-table">
+          <tbody>
+            <tr>
+              <td class="cv-skills-cat">QA Methodologies</td>
+              <td class="cv-skills-val">Manual Testing, Functional &amp; Regression Testing, Smoke &amp; Sanity Sweeps, Boundary Value Analysis (BVA), Equivalence Partitioning (ECP), Requirements Traceability Matrix (RTM), Defect Lifecycle.</td>
+            </tr>
+            <tr>
+              <td class="cv-skills-cat">Automation &amp; API</td>
+              <td class="cv-skills-val">Postman (Collections, Environment Variables, Pre-request &amp; Test Scripts), Newman CLI, Cypress, Selenium WebDriver, REST API Validation.</td>
+            </tr>
+            <tr>
+              <td class="cv-skills-cat">Bug Tracking &amp; Tools</td>
+              <td class="cv-skills-val">Jira (Sprint Workflow, Issue Triage), Git &amp; GitHub (Version Control), Chrome DevTools (Console, Network Payload Inspection), VS Code.</td>
+            </tr>
+            <tr>
+              <td class="cv-skills-cat">Languages &amp; DB</td>
+              <td class="cv-skills-val">JavaScript (ES6+), Python, C++, HTML5, CSS3, SQL, MySQL, Relational Database Management.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Selected Projects & Case Studies -->
+      <section class="cv-sec">
+        <h2 class="cv-sec-title">Key SQA &amp; Engineering Projects</h2>
+
+        <!-- Project 1 -->
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">ApexCare Hospital Management SQA Suite</span>
+              <span class="cv-entry-role">· Lead QA Tester</span>
+            </div>
+            <span class="cv-entry-date">2026</span>
+          </div>
+          <span class="cv-tech-pills">Manual Testing · Jira · Test Plan · RTM · Regression Testing</span>
+          <ul class="cv-list">
+            <li>Authored a comprehensive Test Plan and 120+ functional test cases covering Patient Onboarding, Doctor Scheduling, Billing, and Medical Record workflows.</li>
+            <li>Managed end-to-end defect lifecycles in Jira, categorizing bugs by severity/priority with clear reproduction steps and log attachments.</li>
+            <li>Conducted multi-round regression sweeps and boundary condition checks, ensuring zero high-priority defects prior to staging sign-off.</li>
+          </ul>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">ShopSphere E-Commerce Testing &amp; Automation Suite</span>
+              <span class="cv-entry-role">· QA Automation Engineer</span>
+            </div>
+            <span class="cv-entry-date">2026</span>
+          </div>
+          <span class="cv-tech-pills">Cypress · Selenium WebDriver · Cross-Browser Testing · UI Automation</span>
+          <ul class="cv-list">
+            <li>Engineered automated end-to-end test scenarios validating shopping cart calculations, coupon discount edge cases, and payment gateway responses.</li>
+            <li>Achieved 60% reduction in regression cycle turnaround time by scripting automated sanity test workflows.</li>
+            <li>Conducted cross-browser validation across Chrome, Firefox, and Edge across responsive mobile and desktop viewports.</li>
+          </ul>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">RESTful API Automation &amp; Defect Tracker</span>
+              <span class="cv-entry-role">· API Test Engineer</span>
+            </div>
+            <span class="cv-entry-date">2026</span>
+          </div>
+          <span class="cv-tech-pills">Postman · Newman · JSON Schema · REST API · Automated Assertions</span>
+          <ul class="cv-list">
+            <li>Constructed modular Postman test collections with automated JavaScript assertions verifying status codes (200, 201, 400, 401, 404, 500) and response latencies.</li>
+            <li>Implemented JSON schema validation scripts ensuring strict contract conformance across dynamic backend payloads.</li>
+          </ul>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">Smart Village Scenario — 2D OpenGL Simulation</span>
+              <span class="cv-entry-role">· Graphics Developer</span>
+            </div>
+            <span class="cv-entry-date">2026</span>
+          </div>
+          <span class="cv-tech-pills">C++ · OpenGL · GLUT · Algorithm Implementation</span>
+          <ul class="cv-list">
+            <li>Implemented custom DDA Line drawing and Midpoint Circle rasterization primitives across a 1,133-line C++/OpenGL application.</li>
+            <li>Built an interactive Bangladeshi riverside scene featuring animated solar lamps, 200-particle rainfall simulation, and keyboard-driven object transformations.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="cv-sec">
+        <h2 class="cv-sec-title">Education &amp; Qualifications</h2>
+
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">B.Sc. in Computer Science &amp; Engineering</span>
+              <div style="font-size: 0.85rem; color: var(--ink-muted); margin-top: 0.15rem;">Daffodil International University · Dhaka, Bangladesh</div>
+            </div>
+            <span class="cv-entry-date">2023 — 2026</span>
+          </div>
+          <span class="cv-edu-badge cv-edu-badge--ongoing">Status: Ongoing · Focus: Software Engineering &amp; SQA</span>
+        </div>
+
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">Higher Secondary Certificate (HSC) — Science Group</span>
+              <div style="font-size: 0.85rem; color: var(--ink-muted); margin-top: 0.15rem;">Border Guard Public School &amp; College · Dinajpur Board</div>
+            </div>
+            <span class="cv-entry-date">2019 — 2020</span>
+          </div>
+          <span class="cv-edu-badge">Result: GPA 5.00 / 5.00</span>
+        </div>
+
+        <div class="cv-entry">
+          <div class="cv-entry-head">
+            <div>
+              <span class="cv-entry-title">Secondary School Certificate (SSC) — Science Group</span>
+              <div style="font-size: 0.85rem; color: var(--ink-muted); margin-top: 0.15rem;">Bir Uttam Shaheed Samad School &amp; College · Dinajpur Board</div>
+            </div>
+            <span class="cv-entry-date">2017 — 2018</span>
+          </div>
+          <span class="cv-edu-badge">Result: GPA 5.00 / 5.00</span>
+        </div>
+      </section>
+
+      <!-- Core Strengths -->
+      <section class="cv-sec">
+        <h2 class="cv-sec-title">Core Competencies</h2>
+        <p class="cv-prose">
+          Analytical Thinking &amp; Edge Case Detection · Comprehensive Test Documentation (Test Plans, Test Suites, Bug Reports, RTM) · Agile/Scrum Sprint Workflows · Clear Technical Communication &amp; Cross-Functional Collaboration.
+        </p>
+      </section>
+    </article>
+  </main>
+
+  <!-- =====================================================================
+       Site Footer
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="mono footer-brand">Md. Moniruzzaman Rifat</span>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <span class="footer-copy">© 2026 All rights reserved</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/OSDrifat?tab=overview&from=2026-10-01&to=2026-10-21" target="_blank" rel="noopener noreferrer" class="footer-link mono">GitHub</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/md-moniruzzaman-rifat-4876a92b9/" target="_blank" rel="noopener noreferrer" class="footer-link mono">LinkedIn</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="tel:+8801785468366" class="footer-link mono">+880 1785-468366</a>
+      </div>
+      <div class="footer-right">
+        <a href="#top" class="back-to-top mono" id="back-to-top" aria-label="Back to top of page">
+          <span>Back to Top</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js?v=43"></script>
+  <script src="js/main.js?v=43"></script>
+</body>
+</html>

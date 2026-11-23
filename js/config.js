@@ -26,7 +26,7 @@ window.SITE_CONFIG = {
   bio: "Focused on catching edge cases early, structuring reliable test plans, and ensuring software ships cleanly. Working across manual testing, API validation, and test automation.",
 
   email: "rifat.cse.dev@gmail.com",
-  resumeUrl: "#",
+  resumeUrl: "cv.html",
 
   // Set portraitUrl to an image path (e.g., "./assets/portrait.png") once ready.
   // Leave empty ("") to show the clean typographic monogram frame.
@@ -300,7 +300,7 @@ window.SITE_CONFIG = {
   // Contact Section
   // ---------------------------------------------------------------------------
   contactSection: {
-    eyebrow: "04 / Connect",
+    eyebrow: "05 / Connect",
     titleHTML: "Let's <em>Connect</em>",
     lead: "Open for Software Quality Assurance & Testing opportunities, defect lifecycle analysis, test automation, or tech discussions. Let's build reliable software together.",
     email: "rifat.cse.dev@gmail.com",
