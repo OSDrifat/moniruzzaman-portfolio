@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects &amp; Case Studies — Md. Moniruzzaman Rifat</title>
+  <meta
+    name="description"
+    content="Software QA test suites, automation frameworks, bug tracking case studies, and development projects by Md. Moniruzzaman Rifat."
+  />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css?v=43" />
+</head>
+<body data-page="projects">
+  <!-- Subtle paper-grain texture -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- =======================================================================
+       Header / Floating Architectural Dock Navigation
+       ======================================================================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Home">
+        <span id="brand-name">Moniruzzaman</span><span class="brand-dot">.</span>
+      </a>
+
+      <nav class="nav-dock" aria-label="Primary Navigation">
+        <div class="dock-track" id="dock-track">
+          <span class="dock-indicator" id="dock-indicator" aria-hidden="true"></span>
+          <a href="index.html" class="dock-link">Home</a>
+          <a href="education.html" class="dock-link">Education</a>
+          <a href="index.html#skills" class="dock-link">Skills</a>
+          <a href="projects.html" class="dock-link is-active" aria-current="page">Projects</a>
+          <span class="dock-divider" aria-hidden="true"></span>
+          <a href="index.html#top" class="dock-link" id="dock-cv">CV</a>
+          <a href="contact.html" class="dock-link">Contact</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="availability-pill" title="Current work status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="availability-text" id="availability-text">Available for projects</span>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="theme-toggle"
+          aria-label="Toggle color theme"
+          title="Toggle theme (T)"
+        >
+          <!-- Sun Icon -->
+          <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon -->
+          <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="icon-btn menu-toggle"
+          id="menu-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-drawer"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <line x1="4" y1="8" x2="20" y2="8"></line>
+            <line x1="4" y1="16" x2="20" y2="16"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div class="container mobile-drawer-inner">
+        <a href="index.html" class="drawer-link">Home</a>
+        <a href="education.html" class="drawer-link">Education</a>
+        <a href="index.html#skills" class="drawer-link">Skills</a>
+        <a href="projects.html" class="drawer-link is-active" aria-current="page">Projects</a>
+        <a href="contact.html" class="drawer-link">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       Main Content — Dedicated Projects Page
+       ======================================================================= -->
+  <main>
+    <section id="projects" class="container section-block page-header-spacing" aria-labelledby="projects-title">
+      <div class="skills-header reveal-on-scroll">
+        <div>
+          <span class="subpage-badge">PORTFOLIO SHOWCASE</span>
+          <p class="hero-eyebrow mono" id="projects-eyebrow">02 / Selected Work</p>
+          <h1 class="section-title" id="projects-title">
+            Projects &amp; <em>Case Studies</em>
+          </h1>
+          <p class="section-lead" style="margin-top: 0.75rem; font-size: 0.95rem; color: var(--ink-muted); max-width: 680px; line-height: 1.6;">
+            A curated portfolio of manual &amp; automated test suites, RESTful API validation frameworks, bug tracking lifecycles, and software engineering projects.
+          </p>
+        </div>
+
+        <div class="skill-filters" id="project-filters" role="tablist" aria-label="Filter projects by category"></div>
+      </div>
+
+      <!-- Interactive Project Cards Grid -->
+      <div class="projects-grid" id="projects-grid"></div>
+
+      <!-- SQA Testing Life Cycle (STLC) Workflow Section (Ordered List Requirement) -->
+      <div class="stlc-card reveal-on-scroll" style="margin-top: 3.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <span class="mono edu-table-tag">Engineering Methodology</span>
+          <h2 class="section-title" style="font-size: 1.65rem; margin-top: 0.35rem;">
+            SQA Testing Life Cycle <em>(STLC) Workflow</em>
+          </h2>
+          <p class="stlc-lead">
+            Standardized, rigorous 6-phase quality assurance methodology applied across every software test cycle from requirement ambiguity analysis to production sign-off:
+          </p>
+        </div>
+
+        <ol class="stlc-ordered-list">
+          <li class="stlc-step-item">
+            <div class="stlc-step-content">
+              <strong class="stlc-step-title">Requirements &amp; User Story Analysis</strong>
+              <p class="stlc-step-desc">
+                Reviewing Software Requirement Specifications (SRS) and acceptance criteria to identify ambiguities, untestable edge conditions, and functional gaps early.
+              </p>
+            </div>
+          </li>
+          <li class="stlc-step-item">
+            <div class="stlc-step-content">
+              <strong class="stlc-step-title">Test Planning &amp; Strategy Formulation</strong>
+              <p class="stlc-step-desc">
+                Defining test scope, test environment requirements, automation toolchain selection (Postman, Selenium, Cypress), risk assessment, and resource estimation.
+              </p>
+            </div>
+          </li>
+          <li class="stlc-step-item">
+            <div class="stlc-step-content">
+              <strong class="stlc-step-title">Test Case Design &amp; Traceability Matrix (RTM)</strong>
+              <p class="stlc-step-desc">
+                Authoring positive/negative test cases, Boundary Value Analysis (BVA), Equivalence Partitioning, and maintaining 100% requirements-to-test coverage.
+              </p>
+            </div>
+          </li>
+          <li class="stlc-step-item">
+            <div class="stlc-step-content">
+              <strong class="stlc-step-title">Environment Setup &amp; Test Execution</strong>
+              <p class="stlc-step-desc">
+                Configuring staging servers, running smoke and sanity sweeps, executing full regression suites, and automating REST API payloads with assertion scripts.
+              </p>
+            </div>
+          </li>
+          <li class="stlc-step-item">
+            <div class="stlc-step-content">
+              <strong class="stlc-step-title">Defect Reporting &amp; Bug Lifecycle Management</strong>
+              <p class="stlc-step-desc">
+                Logging high-fidelity defect reports in Jira with exact steps to reproduce, expected vs. actual outcomes, console logs, screenshots, and verifying bug fixes.
+              </p>
+            </div>
+          </li>
+          <li class="stlc-step-item">
+            <div class="stlc-step-content">
+              <strong class="stlc-step-title">Test Closure, Quality Metrics &amp; Sign-off</strong>
+              <p class="stlc-step-desc">
+                Compiling Defect Density, Test Execution Summary Reports, verifying Pass/Fail criteria, and delivering formal QA sign-off for production release.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       Site Footer
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="mono footer-brand">Md. Moniruzzaman Rifat</span>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <span class="footer-copy">© 2026 All rights reserved</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/OSDrifat?tab=overview&from=2026-10-01&to=2026-10-21" target="_blank" rel="noopener noreferrer" class="footer-link mono">GitHub</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/md-moniruzzaman-rifat-4876a92b9/" target="_blank" rel="noopener noreferrer" class="footer-link mono">LinkedIn</a>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <a href="tel:+8801785468366" class="footer-link mono">+880 1785-468366</a>
+      </div>
+      <div class="footer-right">
+        <a href="#top" class="back-to-top mono" id="back-to-top" aria-label="Back to top of page">
+          <span>Back to Top</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Case Study Modal -->
+  <div class="modal-backdrop" id="project-modal" hidden aria-hidden="true">
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-top">
+        <div class="modal-meta mono">
+          <span id="modal-index">01</span>
+          <span class="meta-sep" aria-hidden="true">/</span>
+          <span id="modal-year">2026</span>
+          <span class="meta-sep" aria-hidden="true">/</span>
+          <span class="modal-cat" id="modal-category">QA Case Study</span>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="modal-close"
+          aria-label="Close case study"
+          title="Close (Esc)"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-media" id="modal-media" hidden></div>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="modal-tagline" id="modal-tagline"></p>
+
+        <div class="modal-columns">
+          <div class="modal-block">
+            <span class="mono modal-label">Problem / Context</span>
+            <p class="modal-text" id="modal-problem"></p>
+          </div>
+          <div class="modal-block">
+            <span class="mono modal-label">Approach &amp; Execution</span>
+            <p class="modal-text" id="modal-solution"></p>
+          </div>
+        </div>
+
+        <div class="modal-block">
+          <span class="mono modal-label">Key Deliverables</span>
+          <ul class="modal-deliverables" id="modal-deliverables"></ul>
+        </div>
+
+        <div class="modal-tags" id="modal-tags"></div>
+      </div>
+
+      <div class="modal-footer" id="modal-links"></div>
+    </div>
+  </div>
+
+  <script src="js/config.js?v=43"></script>
+  <script src="js/main.js?v=43"></script>
+</body>
+</html>

@@ -1381,6 +1381,10 @@
     ].filter((item) => item.el);
 
     function updateActiveSection() {
+      if (document.body.dataset.page && document.body.dataset.page !== "home") {
+        return;
+      }
+
       const scrollY = window.scrollY || window.pageYOffset;
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
