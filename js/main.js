@@ -1381,6 +1381,7 @@
       { el: document.getElementById("projects"), label: "Projects" },
       { el: document.getElementById("cv"), label: "CV" },
       { el: document.getElementById("contact"), label: "Contact" },
+      { el: document.getElementById("map"), label: "Map" },
     ].filter((item) => item.el);
 
     function updateActiveSection() {
@@ -1398,9 +1399,12 @@
         return;
       }
 
-      // 2. If scrolled near the bottom, activate Contact
+      // 2. If scrolled near the bottom, activate Map (or Contact if no Map)
       if (scrollY + windowHeight >= docHeight - 80) {
-        if (document.getElementById("contact")) {
+        if (document.getElementById("map")) {
+          setActiveNavItem("Map");
+          return;
+        } else if (document.getElementById("contact")) {
           setActiveNavItem("Contact");
           return;
         }
